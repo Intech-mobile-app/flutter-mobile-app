@@ -5,7 +5,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,10 +27,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -43,11 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'Flutter-App-Intech-Worked....:',
             ),
-            
           ],
         ),
       ),
-      
     );
   }
 }
