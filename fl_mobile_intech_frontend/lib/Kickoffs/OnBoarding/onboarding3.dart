@@ -1,5 +1,7 @@
+import 'package:fl_mobile_intech/Kickoffs/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
@@ -12,6 +14,18 @@ class OnBoardingScreen3 extends StatefulWidget {
 
 class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
   dynamic _checkValue = false;
+  SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initializePrefs();
+  }
+
+  initializePrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -64,7 +78,13 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(200),
                 ),
-                onPressed: _checkValue == true ? () {} : null,
+                onPressed: _checkValue == true
+                    ? () {
+                        _prefs.setInt('newUser', 1);
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomeScreen()));
+                      }
+                    : null,
                 child: Center(
                   child: Text(
                     'Next',

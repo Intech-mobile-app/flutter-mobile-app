@@ -1,13 +1,44 @@
+import 'dart:async';
+
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Kickoffs/Home/home.dart';
+import 'Kickoffs/OnBoarding/onboarding.dart';
+import 'Kickoffs/OnBoarding/onboarding.dart';
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  SharedPreferences _prefs;
+  var newUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initializePrefs();
+  }
+
+  initializePrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      newUser = _prefs.getInt('newUser');
+    });
+    print('SharedPrefs ${newUser.toString()}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +50,7 @@ class MyApp extends StatelessWidget {
         accentColor: MyColors.COLOR_PRIMARY_ACCENT,
         primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
       ),
-      home: OnBoardingScreen(),
+      home: newUser == null ? OnBoardingScreen() : MyHomePage(),
     );
   }
 }
@@ -33,6 +64,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(Duration(milliseconds: 2000), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()));
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

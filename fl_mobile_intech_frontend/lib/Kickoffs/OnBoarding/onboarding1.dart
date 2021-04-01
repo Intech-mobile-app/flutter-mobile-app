@@ -4,9 +4,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen1 extends StatelessWidget {
   PageController pageController;
-  var index;
 
-  OnBoardingScreen1({this.pageController, this.index});
+  OnBoardingScreen1({this.pageController});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -76,10 +75,9 @@ class OnBoardingScreen1 extends StatelessWidget {
                 splashColor: MyColors.COLOR_APP_PRIMARY,
                 color: MyColors.BUTTON_ENABLED,
                 onPressed: () => {
-                  print(index),
-                  pageController.animateToPage(index,
+                  pageController.animateToPage(1,
                       duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInCubic)
+                      curve: Curves.fastOutSlowIn)
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(200),
