@@ -10,6 +10,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  dynamic pageIndex;
   PageController _pageController;
   int currentIndex = 0;
 
@@ -39,9 +40,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
+        onPageChanged: (index) => {
+          setState(() {
+            pageIndex = index;
+          })
+        },
         children: [
-          OnBoardingScreen1(pageController: _pageController),
-          OnBoardingScreen2(pageController: _pageController),
+          OnBoardingScreen1(
+            pageController: _pageController,
+            index: pageIndex,
+          ),
+          OnBoardingScreen2(
+            pageController: _pageController,
+            index: pageIndex,
+          ),
           OnBoardingScreen3(pageController: _pageController),
         ],
       ),

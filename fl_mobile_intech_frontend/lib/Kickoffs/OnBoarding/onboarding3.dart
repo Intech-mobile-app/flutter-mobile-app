@@ -11,12 +11,11 @@ class OnBoardingScreen3 extends StatefulWidget {
 }
 
 class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
+  dynamic _checkValue = false;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
-    bool _checkValue = false;
 
     return Scaffold(
       body: Container(
@@ -57,15 +56,15 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
               width: 96,
               height: 36,
               margin: EdgeInsets.only(top: height / 29),
-              child: MaterialButton(
+              child: RaisedButton(
                 focusColor: MyColors.COLOR_APP_PRIMARY,
                 highlightColor: MyColors.COLOR_APP_PRIMARY,
                 splashColor: MyColors.COLOR_APP_PRIMARY,
                 color: MyColors.BUTTON_ENABLED,
-                onPressed: () {},
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(200),
                 ),
+                onPressed: _checkValue == true ? () {} : null,
                 child: Center(
                   child: Text(
                     'Next',
@@ -88,9 +87,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                     children: [
                       Checkbox(
                         value: _checkValue,
-                        onChanged: (value) => {
+                        onChanged: (bool value) => {
+                          print(value),
                           setState(() {
-                            _checkValue = true;
+                            _checkValue = !_checkValue;
                           })
                         },
                       ),

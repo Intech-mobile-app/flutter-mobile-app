@@ -4,7 +4,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen2 extends StatelessWidget {
   PageController pageController;
-  OnBoardingScreen2({this.pageController});
+  var index;
+  OnBoardingScreen2({this.pageController,this.index});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
