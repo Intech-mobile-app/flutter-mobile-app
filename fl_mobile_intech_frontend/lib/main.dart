@@ -1,3 +1,4 @@
+import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         accentColor: MyColors.COLOR_PRIMARY_ACCENT,
         primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
       ),
-      home: MyHomePage(title: 'Main Page'),
+      home: OnBoardingScreen(),
     );
   }
 }
@@ -50,8 +51,32 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               'Welcome to',
-              style: TextStyle(fontSize: 40.0),
-            )
+              style: TextStyle(
+                fontSize: 40.0,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'My Society',
+              style: TextStyle(
+                fontSize: 40.0,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: width,
+                  child: Image.asset(
+                    'Assets/Images/splash_bck.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

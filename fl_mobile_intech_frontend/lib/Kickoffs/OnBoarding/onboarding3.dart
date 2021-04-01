@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+import 'package:fl_mobile_intech/MyColors.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+class OnBoardingScreen3 extends StatefulWidget {
+  PageController pageController;
+  OnBoardingScreen3({this.pageController});
+
+  @override
+  _OnBoardingScreen3State createState() => _OnBoardingScreen3State();
+}
+
+class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
+    bool _checkValue = false;
+
+    return Scaffold(
+      body: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.center,
+                colors: [MyColors.GRADIENT_BLUE, MyColors.GRADIENT_WHITE])),
+        child: Column(
+          children: [
+            SizedBox(
+              height: height / 3.3,
+            ),
+            Text(
+              'Help each other to maintain\n'
+              'your society standards.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 24,
+                  color: MyColors.TEXT_COLOR,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: height / 12.65,
+            ),
+            SmoothPageIndicator(
+              controller: widget.pageController,
+              count: 3,
+              effect: WormEffect(dotWidth: 10, dotHeight: 10),
+              onDotClicked: (index) => widget.pageController.animateToPage(
+                  index,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInCubic),
+            ),
+            Container(
+              width: 96,
+              height: 36,
+              margin: EdgeInsets.only(top: height / 29),
+              child: MaterialButton(
+                focusColor: MyColors.COLOR_APP_PRIMARY,
+                highlightColor: MyColors.COLOR_APP_PRIMARY,
+                splashColor: MyColors.COLOR_APP_PRIMARY,
+                color: MyColors.BUTTON_ENABLED,
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(200),
+                ),
+                child: Center(
+                  child: Text(
+                    'Next',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: width / 9, right: width / 9, bottom: height / 6.46),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: _checkValue,
+                        onChanged: (value) => {
+                          setState(() {
+                            _checkValue = true;
+                          })
+                        },
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Text(
+                          'I agree to the Terms and Conditions',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

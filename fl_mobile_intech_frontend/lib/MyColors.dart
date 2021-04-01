@@ -11,5 +11,6 @@ class MyColors {
   static Color GRADIENT_WHITE = Color(0xffFFFFFF);
   static Color OTP_BOXES = Color(0xffFFFFFF).withOpacity(0.50);
   static Color RADIO_BUTTON = Color(0xff2E9F76);
+  static Color TEXT_COLOR = Color(0xff113E74);
   
 }
