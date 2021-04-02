@@ -1,25 +1,64 @@
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+
+import 'dart:async';
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
+
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Kickoffs/Home/home.dart';
+import 'Kickoffs/OnBoarding/onboarding.dart';
+
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  SharedPreferences _prefs;
+  var newUser;
+
+  @override
+  void initState() {
+    super.initState();
+    initializePrefs();
+  }
+  
+
+  initializePrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      newUser = _prefs.getInt('newUser');
+    });
+    print('SharedPrefs ${newUser.toString()}');
+  }
+  
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Flutter-App-Intech',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Roboto",
-        primarySwatch: Colors.blue,
         accentColor: MyColors.COLOR_PRIMARY_ACCENT,
         primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
       ),
-      home: MyHomePage(title: 'Main Page'),
+      home: newUser == null ? OnBoardingScreen() : OtpScreen(),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 
@@ -33,11 +72,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+  void initState() {
+    
+    super.initState();
+    Timer(Duration(milliseconds: 2000), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()));
+    });
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
+
       body: Container(
         width: width,
         height: height,
@@ -50,8 +104,32 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               'Welcome to',
-              style: TextStyle(fontSize: 40.0),
-            )
+              style: TextStyle(
+                fontSize: 40.0,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'My Society',
+              style: TextStyle(
+                fontSize: 40.0,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: width,
+                  child: Image.asset(
+                    'Assets/Images/splash_bck.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
