@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp_request.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
@@ -35,51 +37,50 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Color(0xffBBBBBB).withOpacity(0.5),
-                Color(0xffBBBBBB).withOpacity(0.5),
-              ])),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height / 2.3),
-                      Text(
-                        "Please wait while we verify your",
-                        style: TextStyle(
-                            color: MyColors.TEXT_COLOR,
-                            fontSize: 18,
-                            wordSpacing: 1.0,
-                            decoration: TextDecoration.none,
-                            fontFamily: "Roboto",
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(height: 5.0),
-                      Text(
-                        "phone number",
-                        style: TextStyle(
-                            color: MyColors.TEXT_COLOR,
-                            fontSize: 18,
-                            wordSpacing: 1.0,
-                            decoration: TextDecoration.none,
-                            fontFamily: "Roboto",
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(height: 50.0),
-                      CircularProgressIndicator(
-                        backgroundColor: MyColors.COLOR_APP_PRIMARY,
-                      ),
-                    ],
-                  ),
-                ],
+              color: MyColors.PROGRESS_BCK.withOpacity(0.50),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height / 2.3),
+                        Text(
+                          "Please wait while we verify your",
+                          style: TextStyle(
+                              color: MyColors.TEXT_COLOR,
+                              fontSize: 18,
+                              wordSpacing: 1.0,
+                              decoration: TextDecoration.none,
+                              fontFamily: "Roboto",
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          "phone number",
+                          style: TextStyle(
+                              color: MyColors.TEXT_COLOR,
+                              fontSize: 18,
+                              wordSpacing: 1.0,
+                              decoration: TextDecoration.none,
+                              fontFamily: "Roboto",
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(height: 50.0),
+                        CircularProgressIndicator(
+                          backgroundColor: MyColors.COLOR_APP_PRIMARY,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ));
     overlayState.insert(overlayEntry);
 
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(milliseconds: 2200));
     setState(() {
       len = false;
       _onpressed = () {};

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 class MyColors {
-
   static const Color COLOR_PRIMARY_ACCENT = Color(0xff016DD1);
   static const Color COLOR_APP_PRIMARY = Color(0xff2C98F0);
   static const Color COLOR_PRIMARY_BLUE = Color(0xffC1E0FF);
@@ -12,5 +11,5 @@ class MyColors {
   static const Color OTP_BOXES = Color(0xffFFFFFF);
   static const Color RADIO_BUTTON = Color(0xff2E9F76);
   static const Color TEXT_COLOR = Color(0xff113E74);
-  
+  static const Color PROGRESS_BCK = Color(0xffBBBBBB);
 }
