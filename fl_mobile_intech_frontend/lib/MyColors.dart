@@ -10,4 +10,6 @@ class MyColors {
   static const Color GRADIENT_WHITE = Color(0xffFFFFFF);
   static const Color OTP_BOXES = Color(0xffFFFFFF);
   static const Color RADIO_BUTTON = Color(0xff2E9F76);
+  static const Color OTP_HEADER = Color(0xff113E74);
+  
 }
