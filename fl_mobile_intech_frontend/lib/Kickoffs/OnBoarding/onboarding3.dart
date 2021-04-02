@@ -1,11 +1,12 @@
-import 'package:fl_mobile_intech/Kickoffs/Home/home.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
-  PageController pageController;
+  final PageController pageController;
   OnBoardingScreen3({this.pageController});
 
   @override
@@ -70,19 +71,19 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
               width: 96,
               height: 36,
               margin: EdgeInsets.only(top: height / 29),
-              child: RaisedButton(
-                focusColor: MyColors.COLOR_APP_PRIMARY,
-                highlightColor: MyColors.COLOR_APP_PRIMARY,
-                splashColor: MyColors.COLOR_APP_PRIMARY,
-                color: MyColors.BUTTON_ENABLED,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: MyColors.BUTTON_ENABLED,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(200),
                 ),
+                ),
+                
                 onPressed: _checkValue == true
                     ? () {
                         _prefs.setInt('newUser', 1);
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomeScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => OtpScreen()));
                       }
                     : null,
                 child: Center(

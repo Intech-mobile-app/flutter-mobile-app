@@ -1,26 +1,10 @@
+import 'dart:ui';
+
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp_request.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter-App-Intech',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "Roboto",
-        accentColor: MyColors.COLOR_PRIMARY_ACCENT,
-        primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
-      ),
-      home: OtpScreen(),
-    );
-  }
-}
 
 class OtpScreen extends StatefulWidget {
   @override
@@ -35,51 +19,49 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Color(0xffBBBBBB).withOpacity(0.5),
-                Color(0xffBBBBBB).withOpacity(0.5),
-              ])),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2,sigmaY: 2,),
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
                 children: [
-                  Column(
-                    
-                    children: [
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height / 2.3),
-                      Text(
-                        "Please wait while we verify your",
-                        style: TextStyle(
-                            color: MyColors.OTP_HEADER,
-                            fontSize: 18,
-                            wordSpacing: 1.0,
-                            decoration: TextDecoration.none,
-                            fontFamily: "Roboto",
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                          height: 5.0),
-                      Text(
-                        "phone number",
-                        style: TextStyle(
-                            color: MyColors.OTP_HEADER,
-                            fontSize: 18,
-                            wordSpacing: 1.0,
-                            decoration: TextDecoration.none,
-                            fontFamily: "Roboto",
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                          height: 50.0),
-                      CircularProgressIndicator(
-                        backgroundColor: MyColors.COLOR_APP_PRIMARY,
-                      ),
-                    ],
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height / 2.3),
+                  Text(
+                    "Please wait while we verify your",
+                    style: TextStyle(
+                        color: MyColors.TEXT_COLOR,
+                        fontSize: 18,
+                        wordSpacing: 1.0,
+                        decoration: TextDecoration.none,
+                        fontFamily: "Roboto",
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                      height: 5.0),
+                  Text(
+                    "phone number",
+                    style: TextStyle(
+                        color: MyColors.TEXT_COLOR,
+                        fontSize: 18,
+                        wordSpacing: 1.0,
+                        decoration: TextDecoration.none,
+                        fontFamily: "Roboto",
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                      height: 50.0),
+                  CircularProgressIndicator(
+                    backgroundColor: MyColors.CIRCULAR_INDICATOR,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                   ),
                 ],
               ),
-            ));
+            ],
+            ),
+          ),
+        ));
     overlayState.insert(overlayEntry);
 
     await Future.delayed(Duration(seconds: 5));
@@ -98,7 +80,7 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   _printLatestValue() {
-    if (_controller.text.toString().length > 9) {
+    if (_controller.text.toString().length == 10) {
       setState(() {
         len = true;
       });
@@ -136,7 +118,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_back_rounded,
-                          color: MyColors.OTP_HEADER),
+                          color: MyColors.TEXT_COLOR),
                       onPressed: () {},
                     ),
                   ],
@@ -146,16 +128,16 @@ class _OtpScreenState extends State<OtpScreen> {
                   "Register Yourself with Llokality!!!",
                   style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: MyColors.OTP_HEADER),
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.TEXT_COLOR),
                 ),
                 SizedBox(height: 18.0),
                 Text(
                   "Lorem Ipsum",
                   style: TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: MyColors.OTP_HEADER),
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.TEXT_COLOR),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 4.9,
@@ -167,8 +149,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       "+91",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w400),
                     ),
                     Container(
                       color: MyColors.GRADIENT_WHITE,
@@ -178,7 +160,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: TextFormField(
                           controller: _controller,
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w600),
+                              fontSize: 15, fontWeight: FontWeight.w400),
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Contact Number",
@@ -196,7 +178,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   onPressed: _onpressed,
                   style: ElevatedButton.styleFrom(
                       primary: _enabled,
-                      
                       shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(25)))),
@@ -207,7 +188,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       style: TextStyle(
                           color: MyColors.GRADIENT_WHITE,
                           fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
@@ -222,7 +203,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 MyColors.GRADIENT_BLUE,
                 MyColors.GRADIENT_WHITE
               ],
-              tileMode: TileMode.repeated,
+              tileMode: TileMode.clamp
             ),
           ),
         ));

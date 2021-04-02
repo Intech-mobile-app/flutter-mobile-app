@@ -3,7 +3,7 @@ import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen1 extends StatelessWidget {
-  PageController pageController;
+  final PageController pageController;
 
   OnBoardingScreen1({this.pageController});
   @override
