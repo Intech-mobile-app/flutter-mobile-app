@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null ? OnBoardingScreen() : MyHomePage(),
     );
   }
-  
+
   @override
   void dispose() {
     super.dispose();
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => OtpScreen()));
+          MaterialPageRoute(builder: (context) => HomeScreen()));
     });
   }
 

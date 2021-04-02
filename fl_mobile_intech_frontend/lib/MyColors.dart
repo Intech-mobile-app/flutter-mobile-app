@@ -12,4 +12,6 @@ class MyColors {
   static const Color RADIO_BUTTON = Color(0xff2E9F76);
   static const Color TEXT_COLOR = Color(0xff113E74);
   static const Color PROGRESS_BCK = Color(0xffBBBBBB);
+  static const Color HINT_TEXT = Color(0xff000000);
+
 }
