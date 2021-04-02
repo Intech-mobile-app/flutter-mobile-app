@@ -1,10 +1,9 @@
 import 'dart:ui';
 
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp_request.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/request_from_api.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
-
-
 
 class OtpScreen extends StatefulWidget {
   @override
@@ -19,57 +18,60 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2,sigmaY: 2,),
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height / 2.3),
-                  Text(
-                    "Please wait while we verify your",
-                    style: TextStyle(
-                        color: MyColors.TEXT_COLOR,
-                        fontSize: 18,
-                        wordSpacing: 1.0,
-                        decoration: TextDecoration.none,
-                        fontFamily: "Roboto",
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                      height: 5.0),
-                  Text(
-                    "phone number",
-                    style: TextStyle(
-                        color: MyColors.TEXT_COLOR,
-                        fontSize: 18,
-                        wordSpacing: 1.0,
-                        decoration: TextDecoration.none,
-                        fontFamily: "Roboto",
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                      height: 50.0),
-                  CircularProgressIndicator(
-                    backgroundColor: MyColors.CIRCULAR_INDICATOR,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-                  ),
-                ],
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 2,
+                  sigmaY: 2,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height / 2.3),
+                        Text(
+                          "Please wait while we verify your",
+                          style: TextStyle(
+                              color: MyColors.TEXT_COLOR,
+                              fontSize: 18,
+                              wordSpacing: 1.0,
+                              decoration: TextDecoration.none,
+                              fontFamily: "Roboto",
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          "phone number",
+                          style: TextStyle(
+                              color: MyColors.TEXT_COLOR,
+                              fontSize: 18,
+                              wordSpacing: 1.0,
+                              decoration: TextDecoration.none,
+                              fontFamily: "Roboto",
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(height: 50.0),
+                        CircularProgressIndicator(
+                          backgroundColor: MyColors.CIRCULAR_INDICATOR,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-            ),
-          ),
-        ));
+            ));
     overlayState.insert(overlayEntry);
 
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 2));
     setState(() {
       len = false;
       _onpressed = () {};
       _controller.clear();
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OtpAuthScreen()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => OtpAuthScreen()));
     });
     overlayEntry.remove();
   }
@@ -99,6 +101,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (len) {
       _enabled = MyColors.BUTTON_ENABLED;
       _onpressed = () {
+        fetchAuth(_controller.text.toString());
         showOverlay(context);
       };
     }
@@ -179,8 +182,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   style: ElevatedButton.styleFrom(
                       primary: _enabled,
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25)))),
+                          borderRadius: BorderRadius.all(Radius.circular(25)))),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
@@ -197,14 +199,13 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                MyColors.GRADIENT_BLUE,
-                MyColors.GRADIENT_WHITE
-              ],
-              tileMode: TileMode.clamp
-            ),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  MyColors.GRADIENT_BLUE,
+                  MyColors.GRADIENT_WHITE
+                ],
+                tileMode: TileMode.clamp),
           ),
         ));
   }

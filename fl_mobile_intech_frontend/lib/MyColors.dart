@@ -13,5 +13,8 @@ class MyColors {
   static const Color RADIO_BUTTON = Color(0xff2E9F76);
   static const Color TEXT_COLOR = Color(0xff113E74);
   static const Color CIRCULAR_INDICATOR = Color(0xffDADADA);
-  
+  static const Color BLACK_TEXT = Color(0xff000000);
+  static const Color OTP_BOX_OUTLINE = Color(0xff4285F4);
+  static const Color OTP_BOX_INSIDE = Color(0xffBBBBBB);
+
 }
