@@ -1,9 +1,13 @@
+
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+
 import 'dart:async';
 
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
+
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
+
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,7 +50,6 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Roboto",
-        primarySwatch: Colors.blue,
         accentColor: MyColors.COLOR_PRIMARY_ACCENT,
         primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
       ),
@@ -82,10 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+
+      appBar: AppBar(
+        title: Text(widget.title),
+        
+
       body: Container(
         width: width,
         height: height,
@@ -127,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      
     );
   }
 }
