@@ -1,3 +1,5 @@
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+
 import 'dart:async';
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
@@ -53,7 +55,11 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null ? OnBoardingScreen() : OtpScreen(),
     );
   }
-  
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -77,16 +83,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      
+
       body: Container(
         width: width,
         height: height,

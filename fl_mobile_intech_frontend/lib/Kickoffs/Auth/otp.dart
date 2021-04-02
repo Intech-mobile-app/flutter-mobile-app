@@ -17,11 +17,15 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
+
               child: BackdropFilter(
                 filter: ImageFilter.blur(
                   sigmaX: 2,
                   sigmaY: 2,
                 ),
+              color: MyColors.PROGRESS_BCK.withOpacity(0.50),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -52,9 +56,13 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         SizedBox(height: 50.0),
                         CircularProgressIndicator(
+
                           backgroundColor: MyColors.CIRCULAR_INDICATOR,
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.black),
+
+                          backgroundColor: MyColors.COLOR_APP_PRIMARY,
+
                         ),
                       ],
                     ),
@@ -64,7 +72,11 @@ class _OtpScreenState extends State<OtpScreen> {
             ));
     overlayState.insert(overlayEntry);
 
+
     await Future.delayed(Duration(seconds: 2));
+
+    await Future.delayed(Duration(milliseconds: 2200));
+
     setState(() {
       len = false;
       _onpressed = () {};
@@ -84,6 +96,10 @@ class _OtpScreenState extends State<OtpScreen> {
     if (_controller.text.toString().length == 10) {
       setState(() {
         len = true;
+      });
+    } else {
+      setState(() {
+        len = false;
       });
     }
   }
@@ -106,13 +122,12 @@ class _OtpScreenState extends State<OtpScreen> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height / 41.4),
                 Row(
@@ -125,7 +140,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height / 13.2),
+                SizedBox(height: MediaQuery.of(context).size.height / 14.64),
                 Text(
                   "Register Yourself with Llokality!!!",
                   style: TextStyle(
@@ -142,7 +157,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       color: MyColors.TEXT_COLOR),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 4.9,
+                  height: MediaQuery.of(context).size.height / 5.41,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -163,6 +178,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           controller: _controller,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
+                              fontSize: 16, fontWeight: FontWeight.w400),
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Contact Number",
@@ -174,7 +190,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 9.7,
+                  height: MediaQuery.of(context).size.height / 10.77,
                 ),
                 ElevatedButton(
                   onPressed: _onpressed,
@@ -189,6 +205,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       style: TextStyle(
                           color: MyColors.GRADIENT_WHITE,
                           fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),
                   ),
@@ -198,6 +215,7 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
+
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: <Color>[
@@ -205,6 +223,12 @@ class _OtpScreenState extends State<OtpScreen> {
                   MyColors.GRADIENT_WHITE
                 ],
                 tileMode: TileMode.clamp),
+
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[MyColors.GRADIENT_BLUE, MyColors.GRADIENT_WHITE],
+            ),
+
           ),
         ));
   }
