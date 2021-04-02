@@ -44,34 +44,31 @@ class _OtpScreenState extends State<OtpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
-                    
                     children: [
                       SizedBox(
                           height: MediaQuery.of(context).size.height / 2.3),
                       Text(
                         "Please wait while we verify your",
                         style: TextStyle(
-                            color: MyColors.OTP_HEADER,
+                            color: MyColors.TEXT_COLOR,
                             fontSize: 18,
                             wordSpacing: 1.0,
                             decoration: TextDecoration.none,
                             fontFamily: "Roboto",
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
-                          height: 5.0),
+                      SizedBox(height: 5.0),
                       Text(
                         "phone number",
                         style: TextStyle(
-                            color: MyColors.OTP_HEADER,
+                            color: MyColors.TEXT_COLOR,
                             fontSize: 18,
                             wordSpacing: 1.0,
                             decoration: TextDecoration.none,
                             fontFamily: "Roboto",
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
-                          height: 50.0),
+                      SizedBox(height: 50.0),
                       CircularProgressIndicator(
                         backgroundColor: MyColors.COLOR_APP_PRIMARY,
                       ),
@@ -87,7 +84,8 @@ class _OtpScreenState extends State<OtpScreen> {
       len = false;
       _onpressed = () {};
       _controller.clear();
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OtpAuthScreen()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => OtpAuthScreen()));
     });
     overlayEntry.remove();
   }
@@ -98,9 +96,13 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   _printLatestValue() {
-    if (_controller.text.toString().length > 9) {
+    if (_controller.text.toString().length == 10) {
       setState(() {
         len = true;
+      });
+    } else {
+      setState(() {
+        len = false;
       });
     }
   }
@@ -122,13 +124,12 @@ class _OtpScreenState extends State<OtpScreen> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height / 41.4),
                 Row(
@@ -136,29 +137,29 @@ class _OtpScreenState extends State<OtpScreen> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.arrow_back_rounded,
-                          color: MyColors.OTP_HEADER),
+                          color: MyColors.TEXT_COLOR),
                       onPressed: () {},
                     ),
                   ],
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height / 13.2),
+                SizedBox(height: MediaQuery.of(context).size.height / 14.64),
                 Text(
                   "Register Yourself with Llokality!!!",
                   style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: MyColors.OTP_HEADER),
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.TEXT_COLOR),
                 ),
                 SizedBox(height: 18.0),
                 Text(
                   "Lorem Ipsum",
                   style: TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: MyColors.OTP_HEADER),
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.TEXT_COLOR),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 4.9,
+                  height: MediaQuery.of(context).size.height / 5.41,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,8 +168,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       "+91",
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w400),
                     ),
                     Container(
                       color: MyColors.GRADIENT_WHITE,
@@ -178,7 +179,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: TextFormField(
                           controller: _controller,
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w600),
+                              fontSize: 16, fontWeight: FontWeight.w400),
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Contact Number",
@@ -190,24 +191,22 @@ class _OtpScreenState extends State<OtpScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 9.7,
+                  height: MediaQuery.of(context).size.height / 10.77,
                 ),
                 ElevatedButton(
                   onPressed: _onpressed,
                   style: ElevatedButton.styleFrom(
                       primary: _enabled,
-                      
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25)))),
+                          borderRadius: BorderRadius.all(Radius.circular(25)))),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       "Submit",
                       style: TextStyle(
                           color: MyColors.GRADIENT_WHITE,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
@@ -218,11 +217,7 @@ class _OtpScreenState extends State<OtpScreen> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[
-                MyColors.GRADIENT_BLUE,
-                MyColors.GRADIENT_WHITE
-              ],
-              tileMode: TileMode.repeated,
+              colors: <Color>[MyColors.GRADIENT_BLUE, MyColors.GRADIENT_WHITE],
             ),
           ),
         ));

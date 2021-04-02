@@ -1,4 +1,3 @@
-
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 
 import 'dart:async';
@@ -7,7 +6,6 @@ import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
-
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +54,11 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null ? OnBoardingScreen() : MyHomePage(),
     );
   }
+  
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -73,25 +76,20 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+          MaterialPageRoute(builder: (context) => OtpScreen()));
     });
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
-
-      appBar: AppBar(
-        title: Text(widget.title),
-        
-
       body: Container(
         width: width,
         height: height,
@@ -133,7 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      
     );
   }
 }
