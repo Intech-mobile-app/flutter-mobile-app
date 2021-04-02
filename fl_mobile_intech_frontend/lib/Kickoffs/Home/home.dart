@@ -1,10 +1,10 @@
 import 'dart:ui';
-
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDataFromWeb();
   }
@@ -46,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getDataFromWeb() async {
-    final response = await http.get(
-        'http://www.geonames.org/postalcode-search.html?q=Pune&country=IN');
+    var baseUrl = 'www.geonames.org';
+    final response = await http.get(Uri.http(baseUrl, '/postalcode-search.html?q=Pune&country=IN'));
     dom.Document document = parser.parse(response.body);
     final elements = document.getElementsByTagName('td');
     for (int i = 6; i < elements.length; i = i + 9) {
