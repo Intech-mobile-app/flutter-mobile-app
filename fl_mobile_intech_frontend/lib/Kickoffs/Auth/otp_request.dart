@@ -1,3 +1,4 @@
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -34,50 +35,55 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
       body: Container(
         height: height,
         width: width,
-        child: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: height / 45.4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_rounded,
-                        color: MyColors.TEXT_COLOR),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              SizedBox(height: height / 4.6),
-              Text(
-                "Verification Code",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: MyColors.TEXT_COLOR),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Text(
-                "Enter the verification code sent to",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.BLACK_TEXT),
-              ),
-              SizedBox(height: 10.0,),
-              Text(
-                "+91-" + _text,
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.BLACK_TEXT),
-              ),
-              SizedBox(height: 40.0,),
-              OtpBox(),
-            ],
-          ),
+        child: Column(
+          children: [
+            SizedBox(height: height / 45.4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back_rounded,
+                      color: MyColors.TEXT_COLOR),
+                  onPressed: () {
+                    Navigator.of(context).pop(
+                        MaterialPageRoute(builder: (context) => OtpScreen()));
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: height / 4.6),
+            Text(
+              "Verification Code",
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: MyColors.TEXT_COLOR),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Text(
+              "Enter the verification code sent to",
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: MyColors.BLACK_TEXT),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              "+91-" + _text,
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: MyColors.BLACK_TEXT),
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            OtpBox(),
+          ],
         ),
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -114,15 +120,10 @@ class _OtpBoxState extends State<OtpBox> {
       focusNode: _pinPutFocusNode,
       controller: _pinPutController,
       submittedFieldDecoration: pinPutDecoration.copyWith(
-        border: Border.all(
-          color: MyColors.OTP_BOX_OUTLINE
-        )
-      ),
+          border: Border.all(color: MyColors.OTP_BOX_OUTLINE)),
       selectedFieldDecoration: pinPutDecoration,
       followingFieldDecoration: pinPutDecoration.copyWith(
-        border: Border.all(
-          color: MyColors.OTP_BOX_INSIDE
-        ),
+        border: Border.all(color: MyColors.OTP_BOX_INSIDE),
       ),
     );
   }

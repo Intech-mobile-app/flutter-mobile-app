@@ -1,9 +1,11 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
   final PageController pageController;
@@ -74,11 +76,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: MyColors.BUTTON_ENABLED,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(200),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(200),
+                  ),
                 ),
-                ),
-                
                 onPressed: _checkValue == true
                     ? () {
                         _prefs.setInt('newUser', 1);
@@ -118,13 +119,31 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                       SizedBox(
                         width: 20,
                       ),
-                      Expanded(
-                        child: Text(
-                          'I agree to the Terms and Conditions',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                        ),
+                      Text(
+                        "I agree to the ",
+                        style: TextStyle(
+                            color: MyColors.BLACK_TEXT,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: 'Terms and Conditions',
+                              style: TextStyle(
+                                  color: MyColors.COLOR_APP_PRIMARY,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  final url =
+                                      'https://github.com/flutter/gallery/';
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  }
+                                })
+                        ]),
+                      )
                     ],
                   ),
                 ),
