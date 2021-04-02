@@ -2,7 +2,6 @@ import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding1.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding2.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding3.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override
@@ -34,8 +33,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: PageView(
         controller: _pageController,
