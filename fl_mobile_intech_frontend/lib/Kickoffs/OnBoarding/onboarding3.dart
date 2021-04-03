@@ -126,23 +126,25 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
                       ),
-                      RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: 'Terms and Conditions',
-                              style: TextStyle(
-                                  color: MyColors.COLOR_APP_PRIMARY,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  final url =
-                                      'https://github.com/flutter/gallery/';
-                                  if (await canLaunch(url)) {
-                                    await launch(url);
-                                  }
-                                })
-                        ]),
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: 'Terms and Conditions',
+                                style: TextStyle(
+                                    color: MyColors.COLOR_APP_PRIMARY,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    final url =
+                                        'https://github.com/flutter/gallery/';
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    }
+                                  })
+                          ]),
+                        ),
                       )
                     ],
                   ),

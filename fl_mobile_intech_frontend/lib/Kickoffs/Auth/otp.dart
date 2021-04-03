@@ -164,8 +164,8 @@ class _OtpScreenState extends State<OtpScreen> {
                     Container(
                       color: MyColors.GRADIENT_WHITE,
                       child: SizedBox(
-                        height: 56.0,
-                        width: 272.0,
+                        height: MediaQuery.of(context).size.height / 15.5,
+                        width: MediaQuery.of(context).size.width / 1.3,
                         child: TextFormField(
                           controller: _controller,
                           style: TextStyle(
