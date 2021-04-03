@@ -1,4 +1,6 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/request_from_api.dart';
+import 'package:fl_mobile_intech/Kickoffs/Home/home.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -108,6 +110,25 @@ class _OtpBoxState extends State<OtpBox> {
     color: Colors.white54,
     border: Border.all(color: MyColors.OTP_BOX_INSIDE),
   );
+  _otpshare() {
+    if (_pinPutController.text.toString().length == 6) {
+      postAuth(_pinPutController.text.toString(),context);
+    } else {
+
+    }
+  }
+
+  void initState() {
+    super.initState();
+    _pinPutController.addListener(_otpshare);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pinPutController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return PinPut(
