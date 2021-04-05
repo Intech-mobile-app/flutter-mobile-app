@@ -1,7 +1,6 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 
 import 'dart:async';
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 
 import 'package:fl_mobile_intech/MyColors.dart';

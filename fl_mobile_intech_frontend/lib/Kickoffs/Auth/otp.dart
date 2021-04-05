@@ -17,13 +17,6 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
-
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 2,
-                  sigmaY: 2,
-                ),
-              color: MyColors.PROGRESS_BCK.withOpacity(0.50),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                 child: Row(
@@ -61,7 +54,6 @@ class _OtpScreenState extends State<OtpScreen> {
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.black),
 
-                          backgroundColor: MyColors.COLOR_APP_PRIMARY,
 
                         ),
                       ],
@@ -172,13 +164,13 @@ class _OtpScreenState extends State<OtpScreen> {
                     Container(
                       color: MyColors.GRADIENT_WHITE,
                       child: SizedBox(
-                        height: 56.0,
-                        width: 272.0,
+                        height: MediaQuery.of(context).size.height / 15.5,
+                        width: MediaQuery.of(context).size.width / 1.3,
                         child: TextFormField(
                           controller: _controller,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
-                              fontSize: 16, fontWeight: FontWeight.w400),
+                              
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Contact Number",
@@ -205,7 +197,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       style: TextStyle(
                           color: MyColors.GRADIENT_WHITE,
                           fontSize: 16,
-                          fontSize: 14,
+                          
                           fontWeight: FontWeight.w400),
                     ),
                   ),
@@ -215,7 +207,6 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: <Color>[
@@ -223,13 +214,9 @@ class _OtpScreenState extends State<OtpScreen> {
                   MyColors.GRADIENT_WHITE
                 ],
                 tileMode: TileMode.clamp),
-
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[MyColors.GRADIENT_BLUE, MyColors.GRADIENT_WHITE],
             ),
 
           ),
-        ));
+        );
   }
 }
