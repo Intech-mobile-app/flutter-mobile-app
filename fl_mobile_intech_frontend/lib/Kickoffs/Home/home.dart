@@ -12,8 +12,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<dynamic> areasOfCity = <dynamic>[];
-  final List<dynamic> postalCodes = <dynamic>[];
+  List<dynamic> areasOfCity = <dynamic>[];
+  List<dynamic> postalCodes = <dynamic>[];
+  List<dynamic> _searchFilterAreaList = <dynamic>[];
+  List<dynamic> _searchFilterPostalList = <dynamic>[];
 
   StreamController _streamController;
   Stream _stream;
@@ -21,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String city;
   String country;
 
-  int value;
+  dynamic value;
 
   @override
   void initState() {
@@ -29,6 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
     _streamController = StreamController();
     _stream = _streamController.stream;
     getDataFromWeb();
+  }
+
+  setSelectedRadioButton(val) {
+    print('value' + val.toString());
+    setState(() {
+      value = val;
+    });
   }
 
   Widget listAreas() {
@@ -50,15 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: areasOfCity.length,
                     itemBuilder: (context, index) {
                       return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           RadioListTile(
                             activeColor: MyColors.RADIO_BUTTON,
                             toggleable: true,
                             value: index,
                             groupValue: value,
-                            onChanged: (value) => setState(() {
-                              value = value;
-                            }),
+                            onChanged: (val) => setSelectedRadioButton(val),
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -105,13 +114,35 @@ class _HomeScreenState extends State<HomeScreen> {
     final elements = document.getElementsByTagName('td');
     for (int i = 6; i < elements.length; i = i + 9) {
       dynamic elem1 = elements[i].innerHtml;
-      dynamic elem2 = elements[i + 1].innerHtml;
+      dynamic elem2 = elements[i + 1].innerHtml.toString();
 
+      _searchFilterAreaList.add(elem1);
       areasOfCity.add(elem1);
+
+      _searchFilterPostalList.add(elem2);
       postalCodes.add(elem2);
     }
     _streamController.add(areasOfCity);
+
     print(areasOfCity);
+  }
+
+  searchForSociety(val) {
+    setState(() {
+      var areaSearch = _searchFilterAreaList.where((element) {
+        var availableArea = element.toLowerCase();
+        return availableArea.contains(val.toLowerCase());
+      }).toList();
+      var postalSearch = _searchFilterPostalList.where((element) {
+        var availablePostal = element.toString();
+        return availablePostal.contains(val);
+      }).toList();
+      if (areaSearch.length != null) {
+        areasOfCity = areaSearch;
+      } else if (postalSearch.length != null) {
+        postalCodes = postalSearch;
+      }
+    });
   }
 
   @override
@@ -167,6 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     color: Colors.white,
                     child: TextField(
+                      onChanged: (val) => searchForSociety(val),
                       decoration: InputDecoration(
                           focusColor: Colors.white,
                           hoverColor: Colors.white,
