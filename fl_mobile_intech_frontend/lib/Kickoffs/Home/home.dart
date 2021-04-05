@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
@@ -14,81 +15,104 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<dynamic> areasOfCity = <dynamic>[];
   final List<dynamic> postalCodes = <dynamic>[];
 
+  StreamController _streamController;
+  Stream _stream;
+
+  String city;
+  String country;
+
   int value;
 
   @override
   void initState() {
     super.initState();
-    // getDataFromWeb();
+    _streamController = StreamController();
+    _stream = _streamController.stream;
+    getDataFromWeb();
   }
 
   Widget listAreas() {
-    return Expanded(
-      child: ListView.builder(
-        padding: EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-        ),
-        itemCount: areasOfCity.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              RadioListTile(
-                activeColor: MyColors.RADIO_BUTTON,
-                toggleable: true,
-                value: index,
-                groupValue: value,
-                onChanged: (value) => setState(() {
-                  value = value;
+    return areasOfCity.length != null
+        ? Expanded(
+            child: StreamBuilder(
+                stream: _stream,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Text('Please wait while we load the contents..'),
+                    );
+                  }
+                  return ListView.builder(
+                    padding: EdgeInsets.only(
+                      left: 16.0,
+                      right: 16.0,
+                    ),
+                    itemCount: areasOfCity.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          RadioListTile(
+                            activeColor: MyColors.RADIO_BUTTON,
+                            toggleable: true,
+                            value: index,
+                            groupValue: value,
+                            onChanged: (value) => setState(() {
+                              value = value;
+                            }),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new Text(
+                                  areasOfCity[index],
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      letterSpacing: 0.15,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                new Text(
+                                  '${city}\t' + postalCodes[index],
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      letterSpacing: 0.25,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            height: 5,
+                            indent: 10,
+                            color: Colors.grey,
+                          )
+                        ],
+                      );
+                    },
+                  );
                 }),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      areasOfCity[index],
-                      style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 0.15,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      'Pune ' + postalCodes[index],
-                      style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 0.25,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                height: 5,
-                indent: 10,
-                color: Colors.grey,
-              )
-            ],
-          );
-        },
-      ),
-    );
+          )
+        : Container();
   }
 
-  // getDataFromWeb() async {
-  //   final response = await http.get(
-  //       'http://www.geonames.org/postalcode-search.html?q=Pune&country=IN');
-  //   dom.Document document = parser.parse(response.body);
-  //   final elements = document.getElementsByTagName('td');
-  //   for (int i = 6; i < elements.length; i = i + 9) {
-  //     dynamic elem1 = elements[i].innerHtml;
-  //     dynamic elem2 = elements[i + 1].innerHtml;
-  //     postalCodes.add(elem2);
-  //     areasOfCity.add(elem1);
-  //   }
-  //   print(areasOfCity);
-  // }
+  Future getDataFromWeb() async {
+    city = 'Pune';
+    country = 'IN';
+    final response = await http.get(Uri.http('geonames.org',
+        '/postalcode-search.html?q=${city}&country=${country}/'));
+    dom.Document document = parser.parse(response.body);
+    final elements = document.getElementsByTagName('td');
+    for (int i = 6; i < elements.length; i = i + 9) {
+      dynamic elem1 = elements[i].innerHtml;
+      dynamic elem2 = elements[i + 1].innerHtml;
+
+      areasOfCity.add(elem1);
+      postalCodes.add(elem2);
+    }
+    _streamController.add(areasOfCity);
+    print(areasOfCity);
+  }
 
   @override
   void dispose() {
@@ -181,6 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             listAreas(),
+            // streamAreas(),
             SizedBox(
               height: height / 20,
             ),
