@@ -1,28 +1,8 @@
 import 'dart:ui';
-
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp_request.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/request_from_api.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter-App-Intech',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "Roboto",
-        accentColor: MyColors.COLOR_PRIMARY_ACCENT,
-        primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
-      ),
-      home: OtpScreen(),
-    );
-  }
-}
 
 class OtpScreen extends StatefulWidget {
   @override
@@ -37,6 +17,12 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
+
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 2,
+                  sigmaY: 2,
+                ),
               color: MyColors.PROGRESS_BCK.withOpacity(0.50),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
@@ -70,7 +56,13 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         SizedBox(height: 50.0),
                         CircularProgressIndicator(
+
+                          backgroundColor: MyColors.CIRCULAR_INDICATOR,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black),
+
                           backgroundColor: MyColors.COLOR_APP_PRIMARY,
+
                         ),
                       ],
                     ),
@@ -80,7 +72,11 @@ class _OtpScreenState extends State<OtpScreen> {
             ));
     overlayState.insert(overlayEntry);
 
+
+    await Future.delayed(Duration(seconds: 2));
+
     await Future.delayed(Duration(milliseconds: 2200));
+
     setState(() {
       len = false;
       _onpressed = () {};
@@ -120,6 +116,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (len) {
       _enabled = MyColors.BUTTON_ENABLED;
       _onpressed = () {
+        fetchAuth(_controller.text.toString());
         showOverlay(context);
       };
     }
@@ -180,6 +177,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: TextFormField(
                           controller: _controller,
                           style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w400),
                               fontSize: 16, fontWeight: FontWeight.w400),
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -206,6 +204,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       "Submit",
                       style: TextStyle(
                           color: MyColors.GRADIENT_WHITE,
+                          fontSize: 16,
                           fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),
@@ -216,10 +215,20 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
+
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  MyColors.GRADIENT_BLUE,
+                  MyColors.GRADIENT_WHITE
+                ],
+                tileMode: TileMode.clamp),
+
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: <Color>[MyColors.GRADIENT_BLUE, MyColors.GRADIENT_WHITE],
             ),
+
           ),
         ));
   }

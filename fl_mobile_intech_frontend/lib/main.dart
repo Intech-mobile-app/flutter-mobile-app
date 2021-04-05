@@ -1,7 +1,7 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 
 import 'dart:async';
-
+import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 
 import 'package:fl_mobile_intech/MyColors.dart';
@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Kickoffs/Home/home.dart';
 import 'Kickoffs/OnBoarding/onboarding.dart';
-import 'Kickoffs/OnBoarding/onboarding.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -28,10 +28,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initializePrefs();
   }
+  
 
   initializePrefs() async {
     _prefs = await SharedPreferences.getInstance();
@@ -40,9 +40,10 @@ class _MyAppState extends State<MyApp> {
     });
     print('SharedPrefs ${newUser.toString()}');
   }
-
+  
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Flutter-App-Intech',
       debugShowCheckedModeBanner: false,
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         accentColor: MyColors.COLOR_PRIMARY_ACCENT,
         primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
       ),
-      home: newUser == null ? OnBoardingScreen() : MyHomePage(),
+      home: newUser == null ? OnBoardingScreen() : OtpScreen(),
     );
   }
 
@@ -72,7 +73,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
@@ -90,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+
       body: Container(
         width: width,
         height: height,
