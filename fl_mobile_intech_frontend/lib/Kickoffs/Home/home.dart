@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getDataFromWeb();
+    // getDataFromWeb();
   }
 
   Widget listAreas() {
@@ -78,19 +78,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  getDataFromWeb() async {
-    final response = await http.get(
-        'http://www.geonames.org/postalcode-search.html?q=Pune&country=IN');
-    dom.Document document = parser.parse(response.body);
-    final elements = document.getElementsByTagName('td');
-    for (int i = 6; i < elements.length; i = i + 9) {
-      dynamic elem1 = elements[i].innerHtml;
-      dynamic elem2 = elements[i + 1].innerHtml;
-      postalCodes.add(elem2);
-      areasOfCity.add(elem1);
-    }
-    print(areasOfCity);
-  }
+  // getDataFromWeb() async {
+  //   final response = await http.get(
+  //       'http://www.geonames.org/postalcode-search.html?q=Pune&country=IN');
+  //   dom.Document document = parser.parse(response.body);
+  //   final elements = document.getElementsByTagName('td');
+  //   for (int i = 6; i < elements.length; i = i + 9) {
+  //     dynamic elem1 = elements[i].innerHtml;
+  //     dynamic elem2 = elements[i + 1].innerHtml;
+  //     postalCodes.add(elem2);
+  //     areasOfCity.add(elem1);
+  //   }
+  //   print(areasOfCity);
+  // }
 
   @override
   void dispose() {
