@@ -13,6 +13,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<dynamic> areasOfCity = <dynamic>[];
+  final List<dynamic> postalCodes = <dynamic>[];
+
+  int value;
 
   @override
   void initState() {
@@ -32,10 +35,40 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              ListTile(
-                title: Text(areasOfCity[index]),
+              RadioListTile(
+                activeColor: MyColors.RADIO_BUTTON,
+                toggleable: true,
+                value: index,
+                groupValue: value,
+                onChanged: (value) => setState(() {
+                  value = value;
+                }),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      areasOfCity[index],
+                      style: TextStyle(
+                          fontSize: 16,
+                          letterSpacing: 0.15,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      'Pune ' + postalCodes[index],
+                      style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 0.25,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
               ),
               Divider(
+                height: 5,
+                indent: 10,
                 color: Colors.grey,
               )
             ],
@@ -51,8 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
     dom.Document document = parser.parse(response.body);
     final elements = document.getElementsByTagName('td');
     for (int i = 6; i < elements.length; i = i + 9) {
-      dynamic elem = elements[i].innerHtml;
-      areasOfCity.add(elem);
+      dynamic elem1 = elements[i].innerHtml;
+      dynamic elem2 = elements[i + 1].innerHtml;
+      postalCodes.add(elem2);
+      areasOfCity.add(elem1);
     }
     print(areasOfCity);
   }
@@ -142,6 +177,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 5,
+                  )
                 ],
               ),
             ),
@@ -173,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Image.asset(
                   'Assets/Images/search_society_bck.png',
                   width: width,
-                  height: height / 2.33,
+                  height: height / 2.5,
                   fit: BoxFit.cover,
                 ),
               ),
