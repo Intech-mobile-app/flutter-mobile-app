@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
+import 'registerSociety.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -198,16 +199,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     color: Colors.white,
                     child: TextField(
+                      autofocus: false,
                       onChanged: (val) => searchForSociety(val),
                       decoration: InputDecoration(
                           focusColor: Colors.white,
                           hoverColor: Colors.white,
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
                           enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
                           border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
                           hintText: 'Search Your society',
                           suffixIcon: Icon(Icons.search),
                           hintStyle: TextStyle(
@@ -243,15 +248,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Align(
               alignment: Alignment.center,
-              child: RaisedButton(
-                onPressed: () {},
-                color: MyColors.BUTTON_ENABLED,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  'Continue',
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 0.75, color: Colors.white),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: value != null
+                        ? MyColors.BUTTON_ENABLED
+                        : MyColors.BUTTON_DISABLED,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                onPressed: value != null
+                    ? () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => RegisterSociety()));
+                      }
+                    : null,
+                child: Container(
+                  child: Text(
+                    'Continue',
+                    style: TextStyle(
+                        fontSize: 14, letterSpacing: 0.75, color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -264,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: EdgeInsets.only(bottom: 20),
                 child: Image.asset(
                   'Assets/Images/search_society_bck.png',
-                  width: width,
+                  width: width / 1.05,
                   height: height / 2.5,
                   fit: BoxFit.cover,
                 ),

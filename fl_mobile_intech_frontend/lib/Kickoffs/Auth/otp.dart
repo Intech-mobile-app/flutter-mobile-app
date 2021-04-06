@@ -119,7 +119,7 @@ class _OtpScreenState extends State<OtpScreen> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -218,7 +218,6 @@ class _OtpScreenState extends State<OtpScreen> {
                 ],
                 tileMode: TileMode.clamp),
             ),
-
           ),
         );
   }
