@@ -83,7 +83,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
   }
 
   getValidCount() {
-    if (_phoneController.text.toString().length != 0 &&
+    if (_phoneController.text.toString().length == 10 &&
         _nameController.text.toString().length != 0 &&
         _addressController.text.toString().length != 0 &&
         _emailIdController.text.toString().length != 0) {
@@ -184,7 +184,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                   children: [
                     generateTextField(
                       'Contact No.',
-                      'XXXXXXXXXX',
+                      'Enter your 10 digit mobile number',
                       TextInputType.number,
                       Icons.drag_indicator_outlined,
                       true,
@@ -222,32 +222,33 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                       height: height / 19.4,
                     ),
                     StreamBuilder(
-                        stream: getValidCount(),
-                        builder: (context, snapshot) {
-                          print('Snapshot Data : ${snapshot.data}');
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: snapshot.data == 1
-                                  ? MyColors.BUTTON_ENABLED
-                                  : MyColors.BUTTON_DISABLED,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
+                      stream: getValidCount(),
+                      builder: (context, snapshot) {
+                        print('Snapshot Data : ${snapshot.data}');
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: snapshot.data == 1
+                                ? MyColors.BUTTON_ENABLED
+                                : MyColors.BUTTON_DISABLED,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
                               ),
                             ),
-                            onPressed: snapshot.data == 1 ? () {} : null,
-                            child: Container(
-                              child: Text(
-                                'Go!',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 0.75,
-                                    color: Colors.white),
-                              ),
+                          ),
+                          onPressed: snapshot.data == 1 ? () {} : null,
+                          child: Container(
+                            child: Text(
+                              'Go!',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  letterSpacing: 0.75,
+                                  color: Colors.white),
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

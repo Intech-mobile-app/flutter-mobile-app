@@ -1,5 +1,3 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
-
 import 'dart:async';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 

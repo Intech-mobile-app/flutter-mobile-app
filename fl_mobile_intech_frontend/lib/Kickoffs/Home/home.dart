@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
@@ -26,12 +28,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
   dynamic value;
 
+  Position _currentPosition;
+  List _address;
+
+  var _geolocator;
+  var _lastKnownPosition;
+
   @override
   void initState() {
     super.initState();
     _streamController = StreamController();
     _stream = _streamController.stream;
-    getDataFromWeb();
+    _getCurrentLocation();
+  }
+
+  _getCurrentLocation() async {
+    _geolocator =
+        Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    _lastKnownPosition = await Geolocator.getLastKnownPosition();
+    print(_lastKnownPosition);
+    _getAddressFromLatLong(_lastKnownPosition);
+  }
+
+  _getAddressFromLatLong(_lastKnownPosition) async {
+    final _coordinates = new Coordinates(
+        _lastKnownPosition.latitude, _lastKnownPosition.longitude);
+    _address = await Geocoder.local.findAddressesFromCoordinates(_coordinates);
+    var first = _address.first;
+    var _currentCity = first.addressLine.split(',').reversed.toList();
+    print(first.addressLine);
+    setState(() {
+      city = _currentCity[2].toString().replaceAll(RegExp(','), '').toString();
+      country = 'IN';
+    });
+    print(city.toString());
+    getDataFromWeb(city, country);
   }
 
   setSelectedRadioButton(val) {
@@ -106,9 +137,10 @@ class _HomeScreenState extends State<HomeScreen> {
         : Container();
   }
 
-  Future getDataFromWeb() async {
-    city = 'Pune';
-    country = 'IN';
+  Future getDataFromWeb(city, country) async {
+    print('city : ${city}');
+    print('country : ${country}');
+
     final response = await http.get(Uri.http('geonames.org',
         '/postalcode-search.html?q=${city}&country=${country}/'));
     dom.Document document = parser.parse(response.body);
