@@ -202,22 +202,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       autofocus: false,
                       onChanged: (val) => searchForSociety(val),
                       decoration: InputDecoration(
-                          focusColor: Colors.white,
-                          hoverColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          hintText: 'Search Your society',
-                          suffixIcon: Icon(Icons.search),
-                          hintStyle: TextStyle(
-                              fontSize: 16,
-                              color: MyColors.HINT_TEXT.withOpacity(0.60))),
+                        focusColor: Colors.white,
+                        hoverColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        hintText: 'Search Your society',
+                        suffixIcon: Icon(Icons.search),
+                        hintStyle: TextStyle(
+                          fontSize: 16,
+                          color: MyColors.HINT_TEXT.withOpacity(0.60),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -250,15 +252,27 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: value != null
-                        ? MyColors.BUTTON_ENABLED
-                        : MyColors.BUTTON_DISABLED,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                  primary: value != null
+                      ? MyColors.BUTTON_ENABLED
+                      : MyColors.BUTTON_DISABLED,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                ),
                 onPressed: value != null
                     ? () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => RegisterSociety()));
+                        print(areasOfCity[value]);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => RegisterSociety(
+                              city: city,
+                              area: areasOfCity[value],
+                              postalCode: postalCodes[value],
+                            ),
+                          ),
+                        );
                       }
                     : null,
                 child: Container(
