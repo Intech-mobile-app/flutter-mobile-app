@@ -128,8 +128,9 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                       ),
                       Expanded(
                         child: RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
                                 text: 'Terms and Conditions',
                                 style: TextStyle(
                                     color: MyColors.COLOR_APP_PRIMARY,
@@ -142,8 +143,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                     if (await canLaunch(url)) {
                                       await launch(url);
                                     }
-                                  })
-                          ]),
+                                  },
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

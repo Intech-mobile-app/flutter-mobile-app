@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fl_mobile_intech/MyColors.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -154,11 +155,25 @@ class _RegisterSocietyState extends State<RegisterSociety> {
               SizedBox(
                 height: height / 38.8,
               ),
-              Text(
-                '\t\t  Not My Society ?',
-                style: TextStyle(
-                  color: MyColors.TEXT_COLOR,
-                ),
+              Text.rich(
+                TextSpan(text: '\t\t  ', children: [
+                  TextSpan(
+                      text: 'Not My Society ?',
+                      style: TextStyle(
+                        color: MyColors.TEXT_COLOR,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.75,
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.solid,
+                        decorationThickness: 2.0,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          print('Tapped');
+                          Navigator.pop(context);
+                        }),
+                ]),
               ),
               SizedBox(
                 height: height / 9.7,
@@ -224,7 +239,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                             onPressed: snapshot.data == 1 ? () {} : null,
                             child: Container(
                               child: Text(
-                                'Continue',
+                                'Go!',
                                 style: TextStyle(
                                     fontSize: 14,
                                     letterSpacing: 0.75,
