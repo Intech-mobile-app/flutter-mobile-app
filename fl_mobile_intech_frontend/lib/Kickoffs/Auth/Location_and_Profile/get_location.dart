@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'dart:ui';
-import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
 import 'registerSociety.dart';
+
+import 'package:fl_mobile_intech/Components/components_export.dart';
 
 class GetLocationScreen extends StatefulWidget {
   @override

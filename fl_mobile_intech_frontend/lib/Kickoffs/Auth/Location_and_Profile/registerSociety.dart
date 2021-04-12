@@ -1,12 +1,6 @@
-import 'dart:async';
-
 import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../../../MyColors.dart';
+import '../../../Components/components_export.dart';
 
 class RegisterSociety extends StatefulWidget {
   final String city;
@@ -46,41 +40,6 @@ class _RegisterSocietyState extends State<RegisterSociety> {
     super.initState();
     _streamController = StreamController();
     _stream = _streamController.stream;
-  }
-
-  Widget generateTextField(labelText, hintText, keyboardType, icon,
-      bottomPadding, storeVariable, controller) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: 16.0,
-        right: 16.0,
-        bottom: bottomPadding == true ? 16.0 : 0.0,
-      ),
-      color: Colors.white,
-      child: TextFormField(
-        controller: controller,
-        keyboardType: keyboardType,
-        autofocus: false,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(16.0),
-          focusColor: Colors.white,
-          hoverColor: Colors.white,
-          isDense: true,
-          enabledBorder: InputBorder.none,
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-          ),
-          hintText: hintText,
-          labelText: labelText,
-          suffixIcon: Icon(icon),
-          hintStyle: TextStyle(
-            fontSize: 16,
-            color: MyColors.HINT_TEXT.withOpacity(0.60),
-          ),
-        ),
-        obscureText: false,
-      ),
-    );
   }
 
   getValidCount() {
@@ -156,8 +115,10 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                 height: height / 38.8,
               ),
               Text.rich(
-                TextSpan(text: '\t\t  ', children: [
-                  TextSpan(
+                TextSpan(
+                  text: '\t\t  ',
+                  children: [
+                    TextSpan(
                       text: 'Not My Society ?',
                       style: TextStyle(
                         color: MyColors.TEXT_COLOR,
@@ -172,8 +133,10 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                         ..onTap = () {
                           print('Tapped');
                           Navigator.pop(context);
-                        }),
-                ]),
+                        },
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: height / 9.7,
@@ -243,7 +206,8 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                                 ? () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                        builder: (context) => GetLocationScreen(),
+                                        builder: (context) =>
+                                            GetLocationScreen(),
                                       ),
                                     );
                                   }

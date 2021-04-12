@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp_request.dart';
 import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/request_from_api.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
+import 'package:fl_mobile_intech/Components/components_export.dart';
 import 'package:flutter/material.dart';
 
 class OtpScreen extends StatefulWidget {
