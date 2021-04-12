@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'package:fl_mobile_intech/Kickoffs/Home/home.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp_request.dart';
 
 void fetchAuth(String txt) async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
@@ -36,7 +35,7 @@ postAuth(String code,BuildContext context) async {
   if (response.statusCode == 200) {
     print(response.body);
     Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+          .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
   } else {
     print(response.statusCode);
     print("not Worked");

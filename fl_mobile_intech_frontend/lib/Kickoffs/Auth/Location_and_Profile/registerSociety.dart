@@ -1,16 +1,17 @@
 import 'dart:async';
 
+import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../MyColors.dart';
+import '../../../MyColors.dart';
 
 class RegisterSociety extends StatefulWidget {
-  String city;
-  String postalCode;
-  String area;
+  final String city;
+  final String postalCode;
+  final String area;
 
   RegisterSociety({
     this.city,
@@ -100,7 +101,6 @@ class _RegisterSocietyState extends State<RegisterSociety> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -225,25 +225,37 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                       stream: getValidCount(),
                       builder: (context, snapshot) {
                         print('Snapshot Data : ${snapshot.data}');
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: snapshot.data == 1
-                                ? MyColors.BUTTON_ENABLED
-                                : MyColors.BUTTON_DISABLED,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
+                        return Container(
+                          height: height / 18,
+                          width: width / 3.75,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: snapshot.data == 1
+                                  ? MyColors.BUTTON_ENABLED
+                                  : MyColors.BUTTON_DISABLED,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(200),
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: snapshot.data == 1 ? () {} : null,
-                          child: Container(
-                            child: Text(
-                              'Go!',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 0.75,
-                                  color: Colors.white),
+                            onPressed: snapshot.data == 1
+                                ? () {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => GetLocationScreen(),
+                                      ),
+                                    );
+                                  }
+                                : null,
+                            child: Container(
+                              child: Text(
+                                'Go!',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    letterSpacing: 0.75,
+                                    color: Colors.white),
+                              ),
                             ),
                           ),
                         );

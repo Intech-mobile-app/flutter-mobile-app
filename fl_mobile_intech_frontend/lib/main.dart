@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Kickoffs/Home/home.dart';
+import 'Kickoffs/Auth/Location_and_Profile/get_location.dart';
 import 'Kickoffs/OnBoarding/onboarding.dart';
 
 void main() {
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+          MaterialPageRoute(builder: (context) => GetLocationScreen()));
     });
   }
 

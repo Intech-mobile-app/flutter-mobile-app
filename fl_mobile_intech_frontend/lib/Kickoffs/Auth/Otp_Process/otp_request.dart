@@ -1,10 +1,10 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/request_from_api.dart';
-import 'package:fl_mobile_intech/Kickoffs/Home/home.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/request_from_api.dart';
 import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class OtpAuthScreen extends StatefulWidget {
   @override
