@@ -17,12 +17,11 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
-
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 2,
-                  sigmaY: 2,
-                ),
+                child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 2,
+                sigmaY: 2,
+              ),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                 child: Row(
@@ -55,11 +54,9 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         SizedBox(height: 50.0),
                         CircularProgressIndicator(
-
                           backgroundColor: MyColors.CIRCULAR_INDICATOR,
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.black),
-
                         ),
                       ],
                     ),
@@ -69,7 +66,6 @@ class _OtpScreenState extends State<OtpScreen> {
             )));
     overlayState.insert(overlayEntry);
 
-
     await Future.delayed(Duration(seconds: 2));
 
     await Future.delayed(Duration(milliseconds: 2200));
@@ -77,9 +73,13 @@ class _OtpScreenState extends State<OtpScreen> {
     setState(() {
       len = false;
       _onpressed = () {};
-      _controller.clear();
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => OtpAuthScreen()));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => OtpAuthScreen(
+            phNo: _controller.text.toString(),
+          ),
+        ),
+      );
     });
     overlayEntry.remove();
   }
@@ -119,106 +119,103 @@ class _OtpScreenState extends State<OtpScreen> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: SafeArea(
-            child: Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).size.height / 41.4),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_back_rounded,
-                          color: MyColors.TEXT_COLOR),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height / 14.64),
-                Text(
-                  "Register Yourself with Llokality!!!",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.TEXT_COLOR),
-                ),
-                SizedBox(height: 18.0),
-                Text(
-                  "Lorem Ipsum",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.TEXT_COLOR),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 5.41,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "+91",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Container(
-                      color: MyColors.GRADIENT_WHITE,
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height / 15.5,
-                        width: MediaQuery.of(context).size.width / 1.3,
-                        child: TextFormField(
-                          controller: _controller,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: "Contact Number",
-                            border: OutlineInputBorder(),
-                          ),
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height / 41.4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_rounded,
+                        color: MyColors.TEXT_COLOR),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height / 14.64),
+              Text(
+                "Register Yourself with Llokality!!!",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: MyColors.TEXT_COLOR),
+              ),
+              SizedBox(height: 18.0),
+              Text(
+                "Lorem Ipsum",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: MyColors.TEXT_COLOR),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 5.41,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "+91",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Container(
+                    color: MyColors.GRADIENT_WHITE,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 15.5,
+                      width: MediaQuery.of(context).size.width / 1.3,
+                      child: TextFormField(
+                        controller: _controller,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w400),
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "Contact Number",
+                          border: OutlineInputBorder(),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 10.77,
-                ),
-                ElevatedButton(
-                  onPressed: _onpressed,
-                  style: ElevatedButton.styleFrom(
-                      primary: _enabled,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(
-                          color: MyColors.GRADIENT_WHITE,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
                     ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 10.77,
+              ),
+              ElevatedButton(
+                onPressed: _onpressed,
+                style: ElevatedButton.styleFrom(
+                    primary: _enabled,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25)))),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(
+                        color: MyColors.GRADIENT_WHITE,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[
-                  MyColors.GRADIENT_BLUE,
-                  MyColors.GRADIENT_WHITE
-                ],
-                tileMode: TileMode.clamp),
-            ),
-          ),
-        );
+        ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[MyColors.GRADIENT_BLUE, MyColors.GRADIENT_WHITE],
+              tileMode: TileMode.clamp),
+        ),
+      ),
+    );
   }
 }
