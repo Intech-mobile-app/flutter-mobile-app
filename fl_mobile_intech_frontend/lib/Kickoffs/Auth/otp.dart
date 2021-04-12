@@ -17,6 +17,12 @@ class _OtpScreenState extends State<OtpScreen> {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry overlayEntry = OverlayEntry(
         builder: (context) => Container(
+
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 2,
+                  sigmaY: 2,
+                ),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                 child: Row(
@@ -54,14 +60,13 @@ class _OtpScreenState extends State<OtpScreen> {
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.black),
 
-
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-            ));
+            )));
     overlayState.insert(overlayEntry);
 
 
@@ -114,7 +119,7 @@ class _OtpScreenState extends State<OtpScreen> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -170,7 +175,6 @@ class _OtpScreenState extends State<OtpScreen> {
                           controller: _controller,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
-                              
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "Contact Number",
@@ -197,7 +201,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       style: TextStyle(
                           color: MyColors.GRADIENT_WHITE,
                           fontSize: 16,
-                          
                           fontWeight: FontWeight.w400),
                     ),
                   ),
@@ -215,7 +218,6 @@ class _OtpScreenState extends State<OtpScreen> {
                 ],
                 tileMode: TileMode.clamp),
             ),
-
           ),
         );
   }
