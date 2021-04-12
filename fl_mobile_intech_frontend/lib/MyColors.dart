@@ -20,5 +20,5 @@ class MyColors {
   static const Color PROGRESS_BCK = Color(0xffBBBBBB);
   static const Color HINT_TEXT = Color(0xff000000);
 
-
+  static const Color TEXT_UNDERLINE = Color(0xff3262DE);
 }
