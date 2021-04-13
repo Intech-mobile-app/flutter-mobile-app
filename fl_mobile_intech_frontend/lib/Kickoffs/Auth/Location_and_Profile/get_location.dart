@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'dart:ui';
-import 'package:fl_mobile_intech/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,12 +7,14 @@ import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
 import 'registerSociety.dart';
 
-class HomeScreen extends StatefulWidget {
+import 'package:fl_mobile_intech/export.dart';
+
+class GetLocationScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _GetLocationScreenState createState() => _GetLocationScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _GetLocationScreenState extends State<GetLocationScreen> {
   List<dynamic> areasOfCity = <dynamic>[];
   List<dynamic> postalCodes = <dynamic>[];
   List<dynamic> _searchFilterAreaList = <dynamic>[];
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _getCurrentLocation() async {
-    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     _lastKnownPosition = await Geolocator.getLastKnownPosition();
     print(_lastKnownPosition);
     _getAddressFromLatLong(_lastKnownPosition);
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 3,
                                 ),
                                 new Text(
-                                  '${city}\t' + postalCodes[index],
+                                  '$city\t' + postalCodes[index],
                                   style: TextStyle(
                                       fontSize: 14,
                                       letterSpacing: 0.25,
@@ -135,11 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future getDataFromWeb(city, country) async {
-    print('city : ${city}');
-    print('country : ${country}');
+    print('city : $city');
+    print('country : $country');
 
     final response = await http.get(Uri.http('geonames.org',
-        '/postalcode-search.html?q=${city}&country=${country}/'));
+        '/postalcode-search.html?q=$city&country=$country/'));
     dom.Document document = parser.parse(response.body);
     final elements = document.getElementsByTagName('td');
     for (int i = 6; i < elements.length; i = i + 9) {

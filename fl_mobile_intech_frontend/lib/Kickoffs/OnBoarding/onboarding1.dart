@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class OnBoardingScreen1 extends StatelessWidget {
   final PageController pageController;

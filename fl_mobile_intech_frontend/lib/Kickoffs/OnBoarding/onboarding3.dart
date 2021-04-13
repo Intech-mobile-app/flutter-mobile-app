@@ -1,11 +1,8 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
 import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
   final PageController pageController;

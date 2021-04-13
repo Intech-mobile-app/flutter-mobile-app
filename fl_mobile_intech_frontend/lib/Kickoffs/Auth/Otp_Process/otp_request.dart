@@ -1,29 +1,18 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/request_from_api.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:flutter/material.dart';
-import 'package:pinput/pin_put/pin_put.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/request_from_api.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class OtpAuthScreen extends StatefulWidget {
+  final String phNo;
+  OtpAuthScreen({this.phNo});
   @override
   _OtpAuthScreenState createState() => _OtpAuthScreenState();
 }
 
 class _OtpAuthScreenState extends State<OtpAuthScreen> {
-  SharedPreferences _prefs;
-  var _text;
   @override
   void initState() {
     super.initState();
-    _getPref();
-  }
-
-  _getPref() async {
-    _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _text = _prefs.getString('phoneno').toString();
-    });
   }
 
   @override
@@ -31,6 +20,7 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
+    print(widget.phNo);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -74,7 +64,7 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
               height: 10.0,
             ),
             Text(
-              "+91-" + _text,
+              "+91-" + widget.phNo.toString(),
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
@@ -83,7 +73,9 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
             SizedBox(
               height: 40.0,
             ),
-            OtpBox(),
+            OtpBox(
+              phNo: widget.phNo,
+            ),
           ],
         ),
         decoration: BoxDecoration(
@@ -98,6 +90,8 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
 }
 
 class OtpBox extends StatefulWidget {
+  final phNo;
+  OtpBox({this.phNo});
   @override
   _OtpBoxState createState() => _OtpBoxState();
 }
@@ -111,10 +105,9 @@ class _OtpBoxState extends State<OtpBox> {
   );
   _otpshare() {
     if (_pinPutController.text.toString().length == 6) {
-      postAuth(_pinPutController.text.toString(),context);
-    } else {
-
-    }
+      postAuth(
+          _pinPutController.text.toString(), context, widget.phNo.toString());
+    } else {}
   }
 
   void initState() {
