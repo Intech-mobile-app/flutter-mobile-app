@@ -1,14 +1,4 @@
-import 'dart:async';
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
-import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
-
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:flutter/material.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'Kickoffs/Auth/Location_and_Profile/get_location.dart';
-import 'Kickoffs/OnBoarding/onboarding.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null
           ? OnBoardingScreen()
           : phNo == 1
-              ? MyHomePage()
+              ? HomeScreen()
               : OtpScreen(),
     );
   }

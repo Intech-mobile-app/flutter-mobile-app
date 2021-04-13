@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class OnBoardingScreen1 extends StatelessWidget {

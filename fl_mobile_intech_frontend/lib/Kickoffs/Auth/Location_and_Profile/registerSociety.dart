@@ -1,6 +1,4 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
-
-import '../../../export.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class RegisterSociety extends StatefulWidget {
   final String city;
