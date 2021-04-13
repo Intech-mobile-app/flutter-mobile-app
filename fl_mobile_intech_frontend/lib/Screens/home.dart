@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/Components/components_export.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

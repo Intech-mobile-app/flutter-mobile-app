@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components_export.dart';
+import '../export.dart';
 
 Widget generateTextField(labelText, hintText, keyboardType, icon,
       bottomPadding, storeVariable, controller) {
@@ -15,7 +15,7 @@ Widget generateTextField(labelText, hintText, keyboardType, icon,
         keyboardType: keyboardType,
         autofocus: false,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(16.0),
+          contentPadding: EdgeInsets.only(left:16.0,top: 8.0,bottom: 8.0,right: 16.0),
           focusColor: Colors.white,
           hoverColor: Colors.white,
           isDense: true,

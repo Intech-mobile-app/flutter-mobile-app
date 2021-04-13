@@ -1,5 +1,5 @@
 class API {
-  static final String baseUrl =
-      'llokality-intech-xald7lspga-el.a.run.app/api/v1.0/';
-  static String auth = 'auth/phonenumber/91';
+  static const String baseUrl = 'llokality-intech-xald7lspga-el.a.run.app';
+  static const String auth = '/api/v1.0/auth/phonenumber/';
+  static const String society = '/api/v1.0/societies/';
 }

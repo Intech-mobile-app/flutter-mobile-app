@@ -7,7 +7,7 @@ import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
 import 'registerSociety.dart';
 
-import 'package:fl_mobile_intech/Components/components_export.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class GetLocationScreen extends StatefulWidget {
   @override
@@ -319,11 +319,11 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 5),
                 child: Image.asset(
                   'Assets/Images/search_society_bck.png',
-                  width: width / 1.05,
-                  height: height / 2.5,
+                  width: width / 1,
+                  height: height/2.5,
                   fit: BoxFit.cover,
                 ),
               ),

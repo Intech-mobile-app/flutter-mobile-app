@@ -1,7 +1,6 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/request_from_api.dart';
-import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/Components/components_export.dart';
+import 'package:fl_mobile_intech/APIs%20and%20Services/otprequest_from_api.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class OtpAuthScreen extends StatefulWidget {
   final String phNo;
@@ -91,7 +90,7 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
 }
 
 class OtpBox extends StatefulWidget {
-  var phNo;
+  final phNo;
   OtpBox({this.phNo});
   @override
   _OtpBoxState createState() => _OtpBoxState();
@@ -106,7 +105,7 @@ class _OtpBoxState extends State<OtpBox> {
   );
   _otpshare() {
     if (_pinPutController.text.toString().length == 6) {
-      postAuth(
+      OtpRequest().postAuth(
           _pinPutController.text.toString(), context, widget.phNo.toString());
     } else {}
   }
