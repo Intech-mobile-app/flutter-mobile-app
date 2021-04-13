@@ -7,7 +7,7 @@ import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
 import 'registerSociety.dart';
 
-import 'package:fl_mobile_intech/Components/components_export.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class GetLocationScreen extends StatefulWidget {
   @override
@@ -138,8 +138,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     print('city : $city');
     print('country : $country');
 
-    final response = await http.get(Uri.http('geonames.org',
-        '/postalcode-search.html?q=$city&country=$country/'));
+    final response = await http.get(Uri.http(
+        'geonames.org', '/postalcode-search.html?q=$city&country=$country/'));
     dom.Document document = parser.parse(response.body);
     final elements = document.getElementsByTagName('td');
     for (int i = 6; i < elements.length; i = i + 9) {
@@ -319,7 +319,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: EdgeInsets.only(bottom: 5),
                 child: Image.asset(
                   'Assets/Images/search_society_bck.png',
                   width: width / 1.05,

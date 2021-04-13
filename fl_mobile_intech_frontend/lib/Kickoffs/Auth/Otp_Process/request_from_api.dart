@@ -1,6 +1,6 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/Components/components_export.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 void fetchAuth(String txt) async {
   var baseUrl = 'llokality-intech-xald7lspga-el.a.run.app';

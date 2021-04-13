@@ -1,6 +1,7 @@
+import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/approval_screen.dart';
 import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
 
-import '../../../Components/components_export.dart';
+import '../../../export.dart';
 
 class RegisterSociety extends StatefulWidget {
   final String city;
@@ -165,7 +166,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                     ),
                     generateTextField(
                       'Apt No/ House No',
-                      'No.12 Cheran Nagar, Selvapuram North',
+                      'No.12/2',
                       TextInputType.name,
                       Icons.my_location_rounded,
                       true,
@@ -206,8 +207,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                                 ? () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            GetLocationScreen(),
+                                        builder: (context) => ApprovalScreen(),
                                       ),
                                     );
                                   }

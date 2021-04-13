@@ -8,9 +8,9 @@ export 'dart:async';
 export 'package:flutter/gestures.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
-export '../APIs and Services/api.dart';
+export 'APIs and Services/api.dart';
 
 // Components and UI Elements
-export '../Components/profile_text_field.dart';
-export '../MyColors.dart';
+export 'Components/profile_text_field.dart';
+export 'MyColors.dart';
 export 'package:pinput/pin_put/pin_put.dart';
