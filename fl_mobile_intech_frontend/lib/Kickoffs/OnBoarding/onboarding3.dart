@@ -1,11 +1,4 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/otp.dart';
-import 'package:flutter/gestures.dart';
-
-import 'package:flutter/material.dart';
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
   final PageController pageController;
@@ -128,8 +121,9 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                       ),
                       Expanded(
                         child: RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
                                 text: 'Terms and Conditions',
                                 style: TextStyle(
                                     color: MyColors.COLOR_APP_PRIMARY,
@@ -142,8 +136,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                     if (await canLaunch(url)) {
                                       await launch(url);
                                     }
-                                  })
-                          ]),
+                                  },
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

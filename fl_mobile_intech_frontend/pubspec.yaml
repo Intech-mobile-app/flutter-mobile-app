@@ -24,11 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  geocoder: ^0.2.1
+  geolocator: ^7.0.1
   html: ^0.15.0
+  http: any
+  pinput: ^1.2.0
   shared_preferences: any
   smooth_page_indicator: ^0.2.3
-  http: ^0.13.1
-  pinput: ^1.2.0
   url_launcher: ^6.0.3
 
 dev_dependencies:
