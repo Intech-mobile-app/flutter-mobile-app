@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 
 import 'package:fl_mobile_intech/MyColors.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Kickoffs/Home/home.dart';
+import 'Kickoffs/Auth/Location_and_Profile/get_location.dart';
 import 'Kickoffs/OnBoarding/onboarding.dart';
 
 void main() {
@@ -21,6 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   SharedPreferences _prefs;
   var newUser;
+  var phNo;
 
   @override
   void initState() {
@@ -32,8 +34,10 @@ class _MyAppState extends State<MyApp> {
     _prefs = await SharedPreferences.getInstance();
     setState(() {
       newUser = _prefs.getInt('newUser');
+      phNo = _prefs.getInt('phNo');
     });
     print('SharedPrefs ${newUser.toString()}');
+    print('phNo : $phNo');
   }
 
   @override
@@ -46,7 +50,11 @@ class _MyAppState extends State<MyApp> {
         accentColor: MyColors.COLOR_PRIMARY_ACCENT,
         primaryColor: MyColors.COLOR_PRIMARY_ACCENT,
       ),
-      home: newUser == null ? OnBoardingScreen() : MyHomePage(),
+      home: newUser == null
+          ? OnBoardingScreen()
+          : phNo == 1
+              ? MyHomePage()
+              : OtpScreen(),
     );
   }
 
@@ -70,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+          MaterialPageRoute(builder: (context) => GetLocationScreen()));
     });
   }
 
