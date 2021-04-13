@@ -28,10 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   dynamic value;
 
-  Position _currentPosition;
   List _address;
 
-  var _geolocator;
   var _lastKnownPosition;
 
   @override
@@ -43,8 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _getCurrentLocation() async {
-    _geolocator =
-        Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     _lastKnownPosition = await Geolocator.getLastKnownPosition();
     print(_lastKnownPosition);
     _getAddressFromLatLong(_lastKnownPosition);

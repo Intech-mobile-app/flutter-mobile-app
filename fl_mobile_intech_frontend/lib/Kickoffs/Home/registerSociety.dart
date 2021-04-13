@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 import '../../MyColors.dart';
 
 class RegisterSociety extends StatefulWidget {
-  String city;
-  String postalCode;
-  String area;
+  final String city;
+  final String postalCode;
+  final String area;
 
   RegisterSociety({
     this.city,
@@ -100,7 +100,6 @@ class _RegisterSocietyState extends State<RegisterSociety> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 

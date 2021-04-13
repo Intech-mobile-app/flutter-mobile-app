@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter-App-Intech',
+      title: 'Llokality',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Roboto",
@@ -84,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+      
       body: Container(
         width: width,
         height: height,
