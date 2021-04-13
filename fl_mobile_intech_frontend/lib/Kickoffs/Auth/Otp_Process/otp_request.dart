@@ -1,5 +1,5 @@
 import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/request_from_api.dart';
+import 'package:fl_mobile_intech/APIs%20and%20Services/otprequest_from_api.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class OtpAuthScreen extends StatefulWidget {
@@ -105,7 +105,7 @@ class _OtpBoxState extends State<OtpBox> {
   );
   _otpshare() {
     if (_pinPutController.text.toString().length == 6) {
-      postAuth(
+      OtpRequest().postAuth(
           _pinPutController.text.toString(), context, widget.phNo.toString());
     } else {}
   }
