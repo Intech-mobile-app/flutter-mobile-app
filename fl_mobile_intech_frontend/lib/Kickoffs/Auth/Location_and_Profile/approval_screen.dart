@@ -1,3 +1,4 @@
+import 'package:fl_mobile_intech/Screens/home.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class ApprovalScreen extends StatelessWidget {
@@ -20,15 +21,24 @@ class ApprovalScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: Center(
-          child: Text(
-            'Please wait while one of your\nsociety members approves you\non the app',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24,
-              color: MyColors.TEXT_COLOR,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.25,
+        child: GestureDetector(
+          onTap: () => {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            )
+          },
+          child: Center(
+            child: Text(
+              'Please wait while one of your\nsociety members approves you\non the app',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+                color: MyColors.TEXT_COLOR,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.25,
+              ),
             ),
           ),
         ),
