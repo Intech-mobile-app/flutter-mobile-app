@@ -15,12 +15,8 @@ Widget generateTextField(labelText, hintText, keyboardType, icon, bottomPadding,
       keyboardType: keyboardType,
       autofocus: false,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-          top: 8.0,
-          bottom: 8.0,
-        ),
+        contentPadding:
+            EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0, right: 16.0),
         focusColor: Colors.white,
         hoverColor: Colors.white,
         isDense: true,
@@ -36,7 +32,6 @@ Widget generateTextField(labelText, hintText, keyboardType, icon, bottomPadding,
           color: MyColors.HINT_TEXT.withOpacity(0.60),
         ),
       ),
-      obscureText: false,
     ),
   );
 }

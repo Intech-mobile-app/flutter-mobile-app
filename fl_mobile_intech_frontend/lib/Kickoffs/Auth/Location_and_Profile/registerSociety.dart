@@ -166,7 +166,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                     ),
                     generateTextField(
                       'Apt No/ House No',
-                      'No.12/2',
+                      'D1 1101, Dahanukar Regency, Kot...',
                       TextInputType.name,
                       Icons.my_location_rounded,
                       true,

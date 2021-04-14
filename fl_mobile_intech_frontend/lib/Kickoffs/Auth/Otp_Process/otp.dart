@@ -1,6 +1,5 @@
 import 'dart:ui';
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp_request.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/request_from_api.dart';
+import 'package:fl_mobile_intech/APIs%20and%20Services/otprequest_from_api.dart';
 import 'package:fl_mobile_intech/export.dart';
 import 'package:flutter/material.dart';
 
@@ -113,7 +112,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (len) {
       _enabled = MyColors.BUTTON_ENABLED;
       _onpressed = () {
-        fetchAuth(_controller.text.toString());
+        OtpRequest().fetchAuth(_controller.text.toString());
         showOverlay(context);
       };
     }

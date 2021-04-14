@@ -322,8 +322,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 margin: EdgeInsets.only(bottom: 5),
                 child: Image.asset(
                   'Assets/Images/search_society_bck.png',
-                  width: width / 1.05,
-                  height: height / 2.5,
+                  width: width / 1,
+                  height: height/2.5,
                   fit: BoxFit.cover,
                 ),
               ),
