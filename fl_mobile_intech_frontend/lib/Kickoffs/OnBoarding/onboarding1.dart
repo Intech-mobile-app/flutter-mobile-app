@@ -74,9 +74,11 @@ class OnBoardingScreen1 extends StatelessWidget {
                 splashColor: MyColors.COLOR_APP_PRIMARY,
                 color: MyColors.BUTTON_ENABLED,
                 onPressed: () => {
-                  pageController.animateToPage(1,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.fastOutSlowIn)
+                  pageController.animateToPage(
+                    1,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.fastOutSlowIn,
+                  )
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(200),

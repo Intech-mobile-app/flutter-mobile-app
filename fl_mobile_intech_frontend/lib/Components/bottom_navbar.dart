@@ -12,6 +12,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     setState(() {
       _selectedIndex = index;
     });
+    print('Current Index : $_selectedIndex');
   }
 
   @override
@@ -32,7 +33,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         )
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Colors.amber[800],
+      selectedItemColor: MyColors.COLOR_APP_PRIMARY,
       onTap: _onTapped,
     );
   }
