@@ -1,10 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as parser;
-import 'package:html/dom.dart' as dom;
 import 'registerSociety.dart';
 
 import 'package:fl_mobile_intech/export.dart';
@@ -19,6 +14,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   List<dynamic> postalCodes = <dynamic>[];
   List<dynamic> _searchFilterAreaList = <dynamic>[];
   List<dynamic> _searchFilterPostalList = <dynamic>[];
+  List<dynamic> addressList = <dynamic>[];
 
   StreamController _streamController;
   Stream _stream;
@@ -28,38 +24,31 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
 
   dynamic value;
 
-  List _address;
-
-  var _lastKnownPosition;
-
   @override
   void initState() {
     super.initState();
     _streamController = StreamController();
     _stream = _streamController.stream;
-    _getCurrentLocation();
+    _getDataFromApi();
   }
 
-  _getCurrentLocation() async {
-    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-    _lastKnownPosition = await Geolocator.getLastKnownPosition();
-    print(_lastKnownPosition);
-    _getAddressFromLatLong(_lastKnownPosition);
-  }
+  _getDataFromApi() async {
+    var response = await get(Uri.https(API.baseUrl, API.society));
+    var result = jsonDecode(response.body)['data'];
+    for (var areas in result) {
+      print(areas['name']);
+      dynamic elem1 = areas['name'].toString();
+      dynamic elem2 = areas['pincode'].toString();
+      dynamic elem3 = areas['address'].toString();
 
-  _getAddressFromLatLong(_lastKnownPosition) async {
-    final _coordinates = new Coordinates(
-        _lastKnownPosition.latitude, _lastKnownPosition.longitude);
-    _address = await Geocoder.local.findAddressesFromCoordinates(_coordinates);
-    var first = _address.first;
-    var _currentCity = first.addressLine.split(',').reversed.toList();
-    print(first.addressLine);
-    setState(() {
-      city = _currentCity[2].toString().replaceAll(RegExp(','), '').toString();
-      country = 'IN';
-    });
-    print(city.toString());
-    getDataFromWeb(city, country);
+      addressList.add(elem3);
+
+      _searchFilterAreaList.add(elem1);
+      areasOfCity.add(elem1);
+      _searchFilterPostalList.add(elem2);
+      postalCodes.add(elem2);
+    }
+    _streamController.add(areasOfCity);
   }
 
   setSelectedRadioButton(val) {
@@ -73,105 +62,85 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
     return areasOfCity.length != null
         ? Expanded(
             child: StreamBuilder(
-                stream: _stream,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: Text('Please wait while we load the contents..'),
-                    );
-                  }
-                  return ListView.builder(
-                    padding: EdgeInsets.only(
-                      left: 16.0,
-                      right: 16.0,
-                    ),
-                    itemCount: areasOfCity.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RadioListTile(
-                            activeColor: MyColors.RADIO_BUTTON,
-                            toggleable: true,
-                            value: index,
-                            groupValue: value,
-                            onChanged: (val) => setSelectedRadioButton(val),
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                new Text(
-                                  areasOfCity[index],
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      letterSpacing: 0.15,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                new Text(
-                                  '$city\t' + postalCodes[index],
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      letterSpacing: 0.25,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            height: 5,
-                            indent: 10,
-                            color: Colors.grey,
-                          )
-                        ],
-                      );
-                    },
+              stream: _stream,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: Text('Please wait while we load the contents..'),
                   );
-                }),
+                }
+                return ListView.builder(
+                  padding: EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                  ),
+                  itemCount: areasOfCity.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RadioListTile(
+                          activeColor: MyColors.RADIO_BUTTON,
+                          toggleable: true,
+                          value: index,
+                          groupValue: value,
+                          onChanged: (val) => setSelectedRadioButton(val),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              new Text(
+                                areasOfCity[index],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  letterSpacing: 0.15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              new Text(
+                                addressList[index] + ' ' + postalCodes[index],
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    letterSpacing: 0.25,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 5,
+                          indent: 10,
+                          color: Colors.grey,
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
           )
         : Container();
-  }
-
-  Future getDataFromWeb(city, country) async {
-    print('city : $city');
-    print('country : $country');
-
-    final response = await http.get(Uri.http(
-        'geonames.org', '/postalcode-search.html?q=$city&country=$country/'));
-    dom.Document document = parser.parse(response.body);
-    final elements = document.getElementsByTagName('td');
-    for (int i = 6; i < elements.length; i = i + 9) {
-      dynamic elem1 = elements[i].innerHtml;
-      dynamic elem2 = elements[i + 1].innerHtml.toString();
-
-      _searchFilterAreaList.add(elem1);
-      areasOfCity.add(elem1);
-
-      _searchFilterPostalList.add(elem2);
-      postalCodes.add(elem2);
-    }
-    _streamController.add(areasOfCity);
-
-    print(areasOfCity);
   }
 
   searchForSociety(val) {
     setState(() {
       var areaSearch = _searchFilterAreaList.where((element) {
         var availableArea = element.toLowerCase();
-        return availableArea.contains(val.toLowerCase());
+        return (availableArea.contains(val.toLowerCase()));
       }).toList();
-      var postalSearch = _searchFilterPostalList.where((element) {
-        var availablePostal = element.toString();
-        return availablePostal.contains(val);
-      }).toList();
+      // var postalSearch = _searchFilterPostalList.where((element) {
+      //   var availablePostal = element.toString();
+      //   return availablePostal.contains(val);
+      // }).toList();
       if (areaSearch.length != null) {
         areasOfCity = areaSearch;
-      } else if (postalSearch.length != null) {
-        postalCodes = postalSearch;
       }
+      // } else if (postalSearch.length != null) {
+      //   postalCodes = postalSearch;
+      // }
     });
   }
 
@@ -323,7 +292,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 child: Image.asset(
                   'Assets/Images/search_society_bck.png',
                   width: width / 1,
-                  height: height/2.5,
+                  height: height / 2.5,
                   fit: BoxFit.cover,
                 ),
               ),

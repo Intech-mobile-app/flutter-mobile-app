@@ -1,5 +1,10 @@
+import 'package:fl_mobile_intech/APIs%20and%20Services/otprequest_from_api.dart';
 import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
+import 'package:fl_mobile_intech/export.dart';
+
+class OtpAuthScreen extends StatefulWidget {
   final String phNo;
+  OtpAuthScreen({this.phNo});
   @override
   _OtpAuthScreenState createState() => _OtpAuthScreenState();
 }
