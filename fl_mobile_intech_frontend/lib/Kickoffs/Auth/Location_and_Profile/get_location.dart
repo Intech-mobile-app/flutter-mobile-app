@@ -1,7 +1,4 @@
 import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'registerSociety.dart';
-
 import 'package:fl_mobile_intech/export.dart';
 
 class GetLocationScreen extends StatefulWidget {
@@ -33,7 +30,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   }
 
   _getDataFromApi() async {
-    var response = await get(Uri.https(API.baseUrl, API.society));
+    var response = await get(Uri.https(API.baseUrl,API.version + API.societies ));
     var result = jsonDecode(response.body)['data'];
     for (var areas in result) {
       print(areas['name']);
