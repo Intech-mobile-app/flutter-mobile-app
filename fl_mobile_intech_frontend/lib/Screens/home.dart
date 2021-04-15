@@ -1,9 +1,7 @@
-import 'package:fl_mobile_intech/Components/bottom_navbar.dart';
 import 'package:fl_mobile_intech/Components/navigation_drawer.dart';
 import 'package:fl_mobile_intech/Screens/home_tab.dart';
 import 'package:fl_mobile_intech/Screens/members_tab.dart';
 import 'package:fl_mobile_intech/Screens/profile_tab.dart';
-import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -109,7 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _pageController.dispose();
     super.dispose();
   }
