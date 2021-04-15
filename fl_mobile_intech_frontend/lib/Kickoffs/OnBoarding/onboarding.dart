@@ -1,7 +1,4 @@
-import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding1.dart';
-import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding2.dart';
-import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding3.dart';
-import 'package:flutter/material.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override

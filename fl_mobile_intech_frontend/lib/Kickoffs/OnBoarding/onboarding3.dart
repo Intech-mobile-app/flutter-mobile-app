@@ -1,7 +1,3 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
-import 'package:flutter/gestures.dart';
-
-import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
