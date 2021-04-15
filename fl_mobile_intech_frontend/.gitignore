@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+apitest.py
 
 # IntelliJ related
 *.iml

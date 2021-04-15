@@ -24,6 +24,7 @@ export 'package:pinput/pin_put/pin_put.dart';
 export 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
 export 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
 export 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp_request.dart';
+export 'Kickoffs/Auth/Location_and_Profile/registerSociety.dart';
 
 //Onboarding
 export 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';

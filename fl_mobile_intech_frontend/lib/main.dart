@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null
           ? OnBoardingScreen()
           : phNo == 1
-              ? HomeScreen()
+              ? MyHomePage()
               : OtpScreen(),
     );
   }
