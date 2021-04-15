@@ -11,6 +11,10 @@ export 'package:flutter/services.dart';
 export 'APIs and Services/api.dart';
 
 // Components and UI Elements
-export 'Components/profile_text_field.dart';
+export 'Components/register_society_text_field.dart';
 export 'MyColors.dart';
 export 'package:pinput/pin_put/pin_put.dart';
+export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
+export 'package:fl_mobile_intech/Screens/Home/home_tab.dart';
+export 'package:fl_mobile_intech/Screens/Home/members_tab.dart';
+export 'package:fl_mobile_intech/Screens/Home/profile_tab.dart';

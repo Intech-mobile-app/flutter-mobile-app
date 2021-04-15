@@ -24,7 +24,7 @@ class NavigationDrawer extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 13,
           ),
           Divider(
             color: Colors.black54,

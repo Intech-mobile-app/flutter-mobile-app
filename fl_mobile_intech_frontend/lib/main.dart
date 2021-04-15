@@ -1,14 +1,11 @@
-import 'dart:async';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/approval_screen.dart';
 import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
 import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
 
-import 'package:fl_mobile_intech/MyColors.dart';
-import 'package:flutter/material.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Kickoffs/Auth/Location_and_Profile/get_location.dart';
 import 'Kickoffs/OnBoarding/onboarding.dart';
+
+import 'export.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   SharedPreferences _prefs;
   var newUser;
   var phNo;
+  var registerSociety;
 
   @override
   void initState() {
@@ -35,9 +33,11 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       newUser = _prefs.getInt('newUser');
       phNo = _prefs.getInt('phNo');
+      registerSociety = _prefs.getInt('registerSociety');
     });
     print('SharedPrefs ${newUser.toString()}');
     print('phNo : $phNo');
+    print('registerSociety : $registerSociety');
   }
 
   @override
@@ -53,7 +53,9 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null
           ? OnBoardingScreen()
           : phNo == 1
-              ? MyHomePage()
+              ? registerSociety == 1
+                  ? ApprovalScreen()
+                  : GetLocationScreen()
               : OtpScreen(),
     );
   }
@@ -92,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      
       body: Container(
         width: width,
         height: height,

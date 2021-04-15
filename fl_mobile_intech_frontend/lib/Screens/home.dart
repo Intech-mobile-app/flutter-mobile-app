@@ -1,9 +1,3 @@
-import 'package:fl_mobile_intech/Components/bottom_navbar.dart';
-import 'package:fl_mobile_intech/Components/navigation_drawer.dart';
-import 'package:fl_mobile_intech/Screens/home_tab.dart';
-import 'package:fl_mobile_intech/Screens/members_tab.dart';
-import 'package:fl_mobile_intech/Screens/profile_tab.dart';
-import 'package:flutter/material.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,12 +8,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   PageController _pageController;
-
-  var _pageSequence = {
-    '0': HomePage(),
-    '1': ProfilePage(),
-    '2': MembersPage(),
-  };
 
   @override
   void initState() {
@@ -66,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ? FloatingActionButton.extended(
               focusColor: MyColors.COLOR_APP_PRIMARY,
               splashColor: MyColors.BUTTON_ENABLED,
-              tooltip: 'New Message..!',
               backgroundColor: Colors.white,
               label: Text(
                 'New Post',
@@ -109,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _pageController.dispose();
     super.dispose();
   }
