@@ -204,8 +204,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                                 ? () {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            GetLocationScreen(),
+                                        builder: (context) => ApprovalScreen(),
                                       ),
                                     );
                                   }
@@ -214,9 +213,10 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                               child: Text(
                                 'Go!',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 0.75,
-                                    color: Colors.white),
+                                  fontSize: 14,
+                                  letterSpacing: 0.75,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
