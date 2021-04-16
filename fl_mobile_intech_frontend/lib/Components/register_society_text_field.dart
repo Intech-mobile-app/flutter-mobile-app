@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import '../export.dart';
 
 Widget generateTextField(labelText, hintText, keyboardType, icon, bottomPadding,

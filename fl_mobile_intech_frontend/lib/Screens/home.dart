@@ -63,7 +63,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.edit_outlined,
                 color: MyColors.COLOR_APP_PRIMARY,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CreatePostScreen(),
+                  ),
+                );
+              },
             )
           : null,
       appBar: AppBar(

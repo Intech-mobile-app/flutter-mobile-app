@@ -5,9 +5,11 @@ export 'package:url_launcher/url_launcher.dart';
 export 'package:http/http.dart';
 export 'dart:convert';
 export 'dart:async';
+export 'dart:io';
 export 'package:flutter/gestures.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
+export 'package:file_picker/file_picker.dart';
 
 
 //Api and Services
@@ -17,6 +19,8 @@ export 'APIs and Services/user_request.dart';
 
 // Components and UI Elements
 export 'Components/register_society_text_field.dart';
+export 'Components/create_post_text_field.dart';
+export 'Components/user_files.dart';
 export 'MyColors.dart';
 export 'package:pinput/pin_put/pin_put.dart';
 
@@ -38,3 +42,5 @@ export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
 export 'package:fl_mobile_intech/Screens/Home/home_tab.dart';
 export 'package:fl_mobile_intech/Screens/Home/members_tab.dart';
 export 'package:fl_mobile_intech/Screens/Home/profile_tab.dart';
+
+export 'package:fl_mobile_intech/Screens/create_post.dart';

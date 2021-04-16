@@ -78,10 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 2000), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => GetLocationScreen()));
-    });
+    Timer(
+      Duration(milliseconds: 2000),
+      () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => GetLocationScreen(),
+          ),
+        );
+      },
+    );
   }
 
   @override
