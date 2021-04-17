@@ -17,6 +17,9 @@ export 'APIs and Services/user_request.dart';
 // Components
 export 'Components/register_society_text_field.dart';
 export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
+export 'package:fl_mobile_intech/Components/ProfileScreen/profile_text_widget.dart';
+export 'package:fl_mobile_intech/Components/ProfileScreen/submitbutton.dart';
+export 'package:fl_mobile_intech/Components/ProfileScreen/image.dart';
 
 //Auth
 export 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';

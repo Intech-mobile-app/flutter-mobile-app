@@ -8,13 +8,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   PageController _pageController;
-
-  var _pageSequence = {
-    '0': HomePage(),
-    '1': ProfilePage(),
-    '2': MembersPage(),
-  };
-
+  
   @override
   void initState() {
     super.initState();
@@ -27,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _pageController.animateToPage(
       _selectedIndex,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 1),
       curve: Curves.fastOutSlowIn,
     );
     print('Current Index : $_selectedIndex');
@@ -38,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: NavigationDrawer(),
       bottomNavigationBar: BottomNavigationBar(
+        
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -46,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_outlined),
             label: 'Profile',
+            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_outline),
@@ -86,12 +82,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         backgroundColor: Colors.white,
-        shadowColor: Colors.black,
+        elevation: 1.0,
       ),
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        onPageChanged: (index) => print(index),
+        onPageChanged: (index) => _onTapped(index),
+        pageSnapping: true,
         children: [
           HomePage(),
           ProfilePage(),
