@@ -12,7 +12,7 @@ class OtpRequest {
 
   postAuth(String code, BuildContext context, String phNo) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    final response = await post(Uri.https(API.baseUrl, API.auth),
+    final response = await post(Uri.https(API.baseUrl, API.auth ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -22,21 +22,19 @@ class OtpRequest {
         }));
     if (response.statusCode == 200) {
       _prefs.setInt('phNo', 1);
-      print(response.body);
       var user = Otpuser.fromJson(jsonDecode(response.body));
-      print('${user.data}');
       if (user.data == 'newUser'){
         Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
       }
       else if (user.data == 'existingUnverifiedUser'){
+        Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => ApprovalScreen()));
+      }
+      else{
         //need to be changed in future to a different screen
         Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
-      }
-      else{
-        Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
       }
     } else {
       print(response.statusCode);

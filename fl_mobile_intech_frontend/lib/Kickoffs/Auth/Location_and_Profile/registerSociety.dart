@@ -1,4 +1,6 @@
-import 'package:fl_mobile_intech/export.dart';
+import 'package:fl_mobile_intech/APIs%20and%20Services/user_request.dart';
+import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/approval_screen.dart';
+import '../../../export.dart';
 
 class RegisterSociety extends StatefulWidget {
   final String city;
@@ -23,6 +25,8 @@ class _RegisterSocietyState extends State<RegisterSociety> {
   var address;
   var emailId;
 
+  SharedPreferences _prefs;
+
   Stream _stream;
   StreamController _streamController;
 
@@ -33,11 +37,23 @@ class _RegisterSocietyState extends State<RegisterSociety> {
   TextEditingController _addressController = TextEditingController();
   TextEditingController _emailIdController = TextEditingController();
 
+  Map<String, String> user = Map<String, String>();
+
+  dynamic _id;
+
   @override
   void initState() {
     super.initState();
+    initializePrefs();
+    setState(() {
+      _id = UserRequest.getSocietyId(widget.area);
+    });
     _streamController = StreamController();
     _stream = _streamController.stream;
+  }
+
+  initializePrefs() async {
+    _prefs = await SharedPreferences.getInstance();
   }
 
   getValidCount() {
@@ -65,6 +81,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         width: width,
@@ -202,10 +219,23 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                             ),
                             onPressed: snapshot.data == 1
                                 ? () {
+                                    user.addAll(
+                                      <String, String>{
+                                        "emailId": _emailIdController.text,
+                                        "phoneNumber":
+                                            '91${_phoneController.text.toString()}',
+                                        "fullName": _nameController.text,
+                                        "houseNo": _addressController.text,
+                                        "societyId": _id.toString()
+                                      },
+                                    );
+                                    int statusCode = UserRequest.createUser(user);
+                                    if(statusCode == 201){
+                                      _prefs.setInt('registerSociety', 1);
+                                    }
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            GetLocationScreen(),
+                                        builder: (context) => ApprovalScreen(),
                                       ),
                                     );
                                   }
@@ -214,9 +244,10 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                               child: Text(
                                 'Go!',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 0.75,
-                                    color: Colors.white),
+                                  fontSize: 14,
+                                  letterSpacing: 0.75,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

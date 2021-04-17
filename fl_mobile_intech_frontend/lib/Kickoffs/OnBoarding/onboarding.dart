@@ -42,7 +42,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           OnBoardingScreen2(
             pageController: _pageController,
           ),
-          OnBoardingScreen3(pageController: _pageController),
+          OnBoardingScreen3(
+            pageController: _pageController,
+          ),
         ],
       ),
     );
