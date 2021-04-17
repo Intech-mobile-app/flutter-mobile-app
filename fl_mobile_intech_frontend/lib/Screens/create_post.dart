@@ -22,7 +22,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     UserFiles.selectedImageFileForPost.clear();
   }
