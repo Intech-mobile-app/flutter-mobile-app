@@ -10,6 +10,7 @@ export 'package:flutter/gestures.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:file_picker/file_picker.dart';
+export 'MyColors.dart';
 
 //Api and Services
 export 'APIs and Services/api.dart';
@@ -23,6 +24,8 @@ export 'package:fl_mobile_intech/Components/ProfileScreen/profile_text_widget.da
 export 'package:fl_mobile_intech/Components/ProfileScreen/submitbutton.dart';
 export 'package:fl_mobile_intech/Components/ProfileScreen/image.dart';
 export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
+export 'package:fl_mobile_intech/Components/create_post_text_field.dart';
+export 'package:fl_mobile_intech/Components/user_files.dart';
 
 //Auth
 export 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
@@ -44,4 +47,5 @@ export 'package:fl_mobile_intech/Screens/Home/home_tab.dart';
 export 'package:fl_mobile_intech/Screens/Home/members_tab.dart';
 export 'package:fl_mobile_intech/Screens/Profile/profile_tab.dart';
 export 'package:fl_mobile_intech/Screens/create_post.dart';
-export 'MyColors.dart';
+
+

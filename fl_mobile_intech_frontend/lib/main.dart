@@ -46,9 +46,6 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null
           ? OnBoardingScreen()
           : phNo == 1
-              ? registerSociety == 1
-                  ? ApprovalScreen()
-                  : GetLocationScreen()
               ? HomeScreen()
               : OtpScreen(),
     );
