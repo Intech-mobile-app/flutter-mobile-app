@@ -2,7 +2,7 @@ import 'package:fl_mobile_intech/export.dart';
 
 class OtpRequest {
   void fetchAuth(String txt) async {
-    final response = await get(Uri.https(API.baseUrl, API.version + API.auth + '91' + txt));
+    final response = await get(Uri.https(API.baseUrl, API.auth + '91' + txt));
     if (response.statusCode == 200) {
       print(response.body);
     } else {
@@ -12,7 +12,7 @@ class OtpRequest {
 
   postAuth(String code, BuildContext context, String phNo) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    final response = await post(Uri.https(API.baseUrl, API.version + API.auth ),
+    final response = await post(Uri.https(API.baseUrl, API.auth ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -28,9 +28,8 @@ class OtpRequest {
           .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
       }
       else if (user.data == 'existingUnverifiedUser'){
-        //need to be changed in future to a different screen
         Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
+          .push(MaterialPageRoute(builder: (context) => ApprovalScreen()));
       }
       else{
         //need to be changed in future to a different screen

@@ -1,7 +1,3 @@
-import 'package:fl_mobile_intech/Components/navigation_drawer.dart';
-import 'package:fl_mobile_intech/Screens/home_tab.dart';
-import 'package:fl_mobile_intech/Screens/members_tab.dart';
-import 'package:fl_mobile_intech/Screens/profile_tab.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,13 +8,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   PageController _pageController;
-
-  var _pageSequence = {
-    '0': HomePage(),
-    '1': ProfilePage(),
-    '2': MembersPage(),
-  };
-
   @override
   void initState() {
     super.initState();
@@ -31,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _pageController.animateToPage(
       _selectedIndex,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 250),
       curve: Curves.fastOutSlowIn,
     );
     print('Current Index : $_selectedIndex');
@@ -42,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: NavigationDrawer(),
       bottomNavigationBar: BottomNavigationBar(
+        
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -50,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_outlined),
             label: 'Profile',
+            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_outline),
@@ -64,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ? FloatingActionButton.extended(
               focusColor: MyColors.COLOR_APP_PRIMARY,
               splashColor: MyColors.BUTTON_ENABLED,
-              tooltip: 'New Message..!',
               backgroundColor: Colors.white,
               label: Text(
                 'New Post',
@@ -74,7 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.edit_outlined,
                 color: MyColors.COLOR_APP_PRIMARY,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CreatePostScreen(),
+                  ),
+                );
+              },
             )
           : null,
       appBar: AppBar(
@@ -90,12 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         backgroundColor: Colors.white,
-        shadowColor: Colors.black,
+        elevation: 1.0,
       ),
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        onPageChanged: (index) => print(index),
+        onPageChanged: (index) => _onTapped(index),
         children: [
           HomePage(),
           ProfilePage(),
