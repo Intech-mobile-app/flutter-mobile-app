@@ -1,4 +1,4 @@
-import 'package:fl_mobile_intech/export.dart';
+import 'export.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +13,7 @@ class _MyAppState extends State<MyApp> {
   SharedPreferences _prefs;
   var newUser;
   var phNo;
+  var registerSociety;
 
   @override
   void initState() {
@@ -25,9 +26,11 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       newUser = _prefs.getInt('newUser');
       phNo = _prefs.getInt('phNo');
+      registerSociety = _prefs.getInt('registerSociety');
     });
     print('SharedPrefs ${newUser.toString()}');
     print('phNo : $phNo');
+    print('registerSociety : $registerSociety');
   }
 
   @override
@@ -43,6 +46,9 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null
           ? OnBoardingScreen()
           : phNo == 1
+              ? registerSociety == 1
+                  ? ApprovalScreen()
+                  : GetLocationScreen()
               ? HomeScreen()
               : OtpScreen(),
     );
@@ -66,10 +72,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 2000), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => GetLocationScreen()));
-    });
+    Timer(
+      Duration(milliseconds: 2000),
+      () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => GetLocationScreen(),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -82,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      
       body: Container(
         width: width,
         height: height,

@@ -8,7 +8,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   PageController _pageController;
-  
   @override
   void initState() {
     super.initState();
@@ -21,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _pageController.animateToPage(
       _selectedIndex,
-      duration: Duration(milliseconds: 1),
+      duration: Duration(milliseconds: 250),
       curve: Curves.fastOutSlowIn,
     );
     print('Current Index : $_selectedIndex');
@@ -56,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ? FloatingActionButton.extended(
               focusColor: MyColors.COLOR_APP_PRIMARY,
               splashColor: MyColors.BUTTON_ENABLED,
-              tooltip: 'New Message..!',
               backgroundColor: Colors.white,
               label: Text(
                 'New Post',
@@ -66,7 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.edit_outlined,
                 color: MyColors.COLOR_APP_PRIMARY,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CreatePostScreen(),
+                  ),
+                );
+              },
             )
           : null,
       appBar: AppBar(
@@ -88,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _pageController,
         scrollDirection: Axis.horizontal,
         onPageChanged: (index) => _onTapped(index),
-        pageSnapping: true,
         children: [
           HomePage(),
           ProfilePage(),

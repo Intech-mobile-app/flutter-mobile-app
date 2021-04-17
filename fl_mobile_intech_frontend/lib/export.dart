@@ -5,9 +5,11 @@ export 'package:url_launcher/url_launcher.dart';
 export 'package:http/http.dart';
 export 'dart:convert';
 export 'dart:async';
+export 'dart:io';
 export 'package:flutter/gestures.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
+export 'package:file_picker/file_picker.dart';
 
 //Api and Services
 export 'APIs and Services/api.dart';
@@ -20,6 +22,7 @@ export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
 export 'package:fl_mobile_intech/Components/ProfileScreen/profile_text_widget.dart';
 export 'package:fl_mobile_intech/Components/ProfileScreen/submitbutton.dart';
 export 'package:fl_mobile_intech/Components/ProfileScreen/image.dart';
+export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
 
 //Auth
 export 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
@@ -35,11 +38,10 @@ export 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding1.dart';
 export 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding2.dart';
 export 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding3.dart';
 
-//Home
-export 'package:fl_mobile_intech/Screens/home.dart';
-export 'MyColors.dart';
-
 //Screens
-export 'package:fl_mobile_intech/Screens/home_tab.dart';
-export 'package:fl_mobile_intech/Screens/members_tab.dart';
+export 'package:fl_mobile_intech/Screens/home.dart';
+export 'package:fl_mobile_intech/Screens/Home/home_tab.dart';
+export 'package:fl_mobile_intech/Screens/Home/members_tab.dart';
 export 'package:fl_mobile_intech/Screens/Profile/profile_tab.dart';
+export 'package:fl_mobile_intech/Screens/create_post.dart';
+export 'MyColors.dart';
