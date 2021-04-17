@@ -8,17 +8,16 @@ class CreatePostScreen extends StatefulWidget {
 class _CreatePostScreenState extends State<CreatePostScreen> {
   Color _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
 
-  StreamController _streamController;
-  Stream _stream;
-
   @override
   void initState() {
     super.initState();
-    _streamController = StreamController();
-    _stream = _streamController.stream;
-    setState(() {
-      _streamController.add(UserFiles.selectedImageFileForPost);
-    });
+  }
+
+  Stream<List> _getSelectedImageList(Duration refreshTime) async* {
+    while (true) {
+      await Future.delayed(refreshTime);
+      yield UserFiles.selectedImageFileForPost;
+    }
   }
 
   @override
@@ -26,7 +25,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     // TODO: implement dispose
     super.dispose();
     UserFiles.selectedImageFileForPost.clear();
-    _streamController.close();
   }
 
   @override
@@ -103,16 +101,17 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 height: 20,
               ),
               StreamBuilder(
-                stream: _stream,
+                stream: _getSelectedImageList(Duration(milliseconds: 1000)),
                 builder: (context, snapshot) {
                   print(snapshot.data);
-                  print(snapshot.data.toString().length);
+                  print('data length :::');
                   if (!(snapshot.data
-                          .toString()
-                          .replaceAll('[', '')
-                          .replaceAll(']', '')
-                          .length >
-                      0)) {
+                              .toString()
+                              .replaceAll('[', '')
+                              .replaceAll(']', '')
+                              .length >
+                          0) ||
+                      !snapshot.hasData) {
                     return Container();
                   }
                   return Image.file(

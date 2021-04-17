@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _pageController.animateToPage(
       _selectedIndex,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 250),
       curve: Curves.fastOutSlowIn,
     );
     print('Current Index : $_selectedIndex');
@@ -90,7 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        onPageChanged: (index) => print(index),
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         children: [
           HomePage(),
           ProfilePage(),

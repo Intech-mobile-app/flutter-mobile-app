@@ -1,3 +1,3 @@
 class UserFiles {
-  static List selectedImageFileForPost = [];
+  static List<dynamic> selectedImageFileForPost = [];
 }
