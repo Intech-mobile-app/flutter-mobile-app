@@ -8,7 +8,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   PageController _pageController;
-
   @override
   void initState() {
     super.initState();
@@ -32,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: NavigationDrawer(),
       bottomNavigationBar: BottomNavigationBar(
+        
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_outlined),
             label: 'Profile',
+            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_outline),
@@ -85,16 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         backgroundColor: Colors.white,
-        shadowColor: Colors.black,
+        elevation: 1.0,
       ),
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onPageChanged: (index) => _onTapped(index),
         children: [
           HomePage(),
           ProfilePage(),

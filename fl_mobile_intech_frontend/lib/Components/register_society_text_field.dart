@@ -1,4 +1,4 @@
-import '../export.dart';
+import 'package:fl_mobile_intech/export.dart';
 
 Widget generateTextField(labelText, hintText, keyboardType, icon, bottomPadding,
     storeVariable, controller) {

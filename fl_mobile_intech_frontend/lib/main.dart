@@ -1,10 +1,3 @@
-import 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/approval_screen.dart';
-import 'package:fl_mobile_intech/Kickoffs/Auth/Otp_Process/otp.dart';
-import 'package:fl_mobile_intech/Kickoffs/OnBoarding/onboarding.dart';
-
-import 'Kickoffs/Auth/Location_and_Profile/get_location.dart';
-import 'Kickoffs/OnBoarding/onboarding.dart';
-
 import 'export.dart';
 
 void main() {
@@ -56,6 +49,7 @@ class _MyAppState extends State<MyApp> {
               ? registerSociety == 1
                   ? ApprovalScreen()
                   : GetLocationScreen()
+              ? HomeScreen()
               : OtpScreen(),
     );
   }
