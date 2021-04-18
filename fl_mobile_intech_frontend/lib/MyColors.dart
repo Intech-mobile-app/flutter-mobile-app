@@ -21,4 +21,6 @@ class MyColors {
   static const Color HINT_TEXT = Color(0xff000000);
 
   static const Color TEXT_UNDERLINE = Color(0xff3262DE);
+  static const Color PROFILE_TEXT_BG = Color(0xffF7F9FC);
+  static const Color PROFILE_TEXT_BOX = Color(0xffEAEEF5);
 }

@@ -28,9 +28,8 @@ class OtpRequest {
           .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
       }
       else if (user.data == 'existingUnverifiedUser'){
-        //need to be changed in future to a different screen
         Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
+          .push(MaterialPageRoute(builder: (context) => ApprovalScreen()));
       }
       else{
         //need to be changed in future to a different screen
