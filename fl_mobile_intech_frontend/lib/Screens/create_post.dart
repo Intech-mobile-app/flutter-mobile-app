@@ -124,18 +124,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       for (var i = 0; i < snapshot.data.length; i++)
                         Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: FileImage(
-                                  File(
-                                    snapshot.data[i]
-                                        .toString()
-                                        .replaceAll('File: ', '')
-                                        .replaceAll("'", ''),
-                                  ),
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: FileImage(
+                                File(
+                                  snapshot.data[i]
+                                      .toString()
+                                      .replaceAll('File: ', '')
+                                      .replaceAll("'", ''),
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                         ),
                     ],
                   );
