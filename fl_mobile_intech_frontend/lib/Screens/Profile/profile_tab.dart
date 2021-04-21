@@ -14,12 +14,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   final ScrollController _scrollController = ScrollController();
 
-  showImagehere() {
-    setState(() {
-      
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -51,30 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
             child: textwidget(context, _societycontroller, 'Society'),
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 9.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      pickFromGallery(ImageSource.gallery);
-                    },
-                    icon: Image.asset(
-                      'Assets/Images/profile_upload.png',
-                      height: 22.0,
-                      width: 22.0,
-                    )),
-                Text('Update the profile picture'),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              showImagehere(),
-            ],
-          ),
+          ShowImage(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
