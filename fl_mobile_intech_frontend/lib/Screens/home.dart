@@ -89,9 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        onPageChanged: (index) => setState(() {
-          _selectedIndex = index;
-        }),
+        onPageChanged: (index) => setState(
+          () {
+            _selectedIndex = index;
+          },
+        ),
         children: [
           HomePage(),
           ProfilePage(),
