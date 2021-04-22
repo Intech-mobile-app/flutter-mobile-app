@@ -11,6 +11,7 @@ export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:file_picker/file_picker.dart';
 export 'MyColors.dart';
+export 'package:image_picker/image_picker.dart';
 
 //Api and Services
 export 'APIs and Services/api.dart';
