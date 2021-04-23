@@ -1,3 +1,4 @@
+import 'package:fl_mobile_intech/APIs%20and%20Services/profilepost.dart';
 import 'package:fl_mobile_intech/export.dart';
 
 class ShowImage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _ShowImageState extends State<ShowImage> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+        ProfilePost(file: pickedFile.path).uploadProfilePost();
       } else {
         print('No image selected.');
       }
@@ -49,7 +51,7 @@ class _ShowImageState extends State<ShowImage> {
                       backgroundImage: NetworkImage(
                           'https://uploads-ssl.webflow.com/6030077fdbd53858ff7c4765/603c1ac00b9e8a080528b4ae_SalonBrillareGenericProfileAvi.jpg')))
               : Container(
-                height: 150.0,
+                  height: 150.0,
                   width: 150.0,
                   child: ClipOval(child: Image.file(_image)),
                 )
@@ -58,4 +60,3 @@ class _ShowImageState extends State<ShowImage> {
     );
   }
 }
-

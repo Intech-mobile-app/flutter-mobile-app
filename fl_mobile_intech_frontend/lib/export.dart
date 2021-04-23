@@ -12,11 +12,13 @@ export 'package:flutter/services.dart';
 export 'package:file_picker/file_picker.dart';
 export 'MyColors.dart';
 export 'package:image_picker/image_picker.dart';
+export 'package:provider/provider.dart';
 
 //Api and Services
 export 'APIs and Services/api.dart';
 export 'APIs and Services/otprequest_from_api.dart';
 export 'APIs and Services/user_request.dart';
+export 'APIs and Services/profilepost.dart';
 
 // Components
 export 'Components/register_society_text_field.dart';
