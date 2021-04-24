@@ -4,4 +4,5 @@ class API {
   static const String auth = 'auth/phonenumber/';
   static const String societies = 'societies/';
   static const String createuser = 'users/';
+  static const String profileupload = 'uploads';
 }
