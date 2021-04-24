@@ -5,7 +5,11 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage>
+    with AutomaticKeepAliveClientMixin<ProfilePage> {
+  @override
+  bool get wantKeepAlive => true;
+
   final TextEditingController _namecontroller = TextEditingController();
 
   final TextEditingController _emailcontroller = TextEditingController();
@@ -16,6 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SingleChildScrollView(
       controller: _scrollController,
       child: Column(
