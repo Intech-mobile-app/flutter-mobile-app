@@ -31,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: NavigationDrawer(),
       bottomNavigationBar: BottomNavigationBar(
-        
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -40,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt_outlined),
             label: 'Profile',
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_outline),
@@ -91,7 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        onPageChanged: (index) => _onTapped(index),
+        onPageChanged: (index) => setState(
+          () {
+            _selectedIndex = index;
+          },
+        ),
         children: [
           HomePage(),
           ProfilePage(),

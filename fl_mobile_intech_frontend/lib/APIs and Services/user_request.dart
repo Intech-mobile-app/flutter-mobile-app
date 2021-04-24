@@ -3,7 +3,7 @@ import 'package:fl_mobile_intech/export.dart';
 class UserRequest {
   static createUser(Map user) async {
     dynamic response = await post(
-      Uri.https(API.baseUrl, API.createuser),
+      Uri.https(API.baseUrl, API.version+API.createuser),
       headers: <String, String>{'Content-Type': 'application/json'},
       body: jsonEncode(user),
     );
