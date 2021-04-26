@@ -2,7 +2,8 @@ import 'package:fl_mobile_intech/export.dart';
 
 class OtpRequest {
   void fetchAuth(String txt) async {
-    final response = await get(Uri.https(API.baseUrl, API.version + API.auth + '91' + txt));
+    final response =
+        await get(Uri.https(API.baseUrl, API.version + API.auth + '91' + txt));
     if (response.statusCode == 200) {
       print(response.body);
     } else {
@@ -12,7 +13,7 @@ class OtpRequest {
 
   postAuth(String code, BuildContext context, String phNo) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    final response = await post(Uri.https(API.baseUrl, API.version + API.auth ),
+    final response = await post(Uri.https(API.baseUrl, API.version + API.auth),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -23,18 +24,26 @@ class OtpRequest {
     if (response.statusCode == 200) {
       _prefs.setInt('phNo', 1);
       var user = Otpuser.fromJson(jsonDecode(response.body));
-      if (user.data == 'newUser'){
+      if (user.data == 'newUser') {
         Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
-      }
-      else if (user.data == 'existingUnverifiedUser'){
+            .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
+      } else if (user.data == 'existingUnverifiedUser') {
         Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ApprovalScreen()));
-      }
-      else{
-        //need to be changed in future to a different screen
-        Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => GetLocationScreen()));
+            .push(MaterialPageRoute(builder: (context) => ApprovalScreen()));
+      } else {
+        try {
+          var token = jsonDecode(response.body)['data']['token'];
+          print('user.data');
+          print(token);
+          _prefs.setString('authToken', token);
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          );
+        } catch (e) {
+          print(e);
+        }
       }
     } else {
       print(response.statusCode);
