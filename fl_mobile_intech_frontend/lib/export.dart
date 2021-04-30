@@ -19,6 +19,7 @@ export 'APIs and Services/api.dart';
 export 'APIs and Services/otprequest_from_api.dart';
 export 'APIs and Services/user_request.dart';
 export 'APIs and Services/profilepost.dart';
+export 'APIs and Services/post.dart';
 
 // Components
 export 'Components/register_society_text_field.dart';

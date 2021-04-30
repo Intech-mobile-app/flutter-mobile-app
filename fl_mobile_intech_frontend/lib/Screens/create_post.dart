@@ -59,29 +59,20 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-<<<<<<< HEAD
-                      setState(
-                        () {
-                          _sendIconColor = MyColors.BUTTON_DISABLED;
-                        },
-                      );
-                      Future.delayed(Duration(milliseconds: 1000)).then(
-                        (value) => setState(
-                          () {
-                            _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
-                          },
-                        ),
-                      );
-=======
+                      
                       setState(() {
                         _sendIconColor = MyColors.BUTTON_DISABLED;
-                        
+                        if (UserFiles.selectedImageFileForPost.isNotEmpty) {
+                        Posts().uploadPosts(UserFiles.selectedImageFileForPost);
+                        print("post called");
+                      } else {
+                        print("not Userfiles");
+                      }
                       });
                       Future.delayed(Duration(milliseconds: 1000))
                           .then((value) => setState(() {
                                 _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
                               }));
->>>>>>> 497873769f401735e3cb025a0b31cc100a2c7424
                     },
                     tooltip: 'Post your message',
                     icon: const Icon(
@@ -116,10 +107,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 height: 20,
               ),
               StreamBuilder(
-                stream: _getSelectedImageList(Duration(milliseconds: 1000)),
+                stream: _getSelectedImageList(Duration(milliseconds: 10000)),
                 builder: (context, snapshot) {
                   print(snapshot.data);
-                  print('data length :::');
                   if (!(snapshot.data
                               .toString()
                               .replaceAll('[', '')
