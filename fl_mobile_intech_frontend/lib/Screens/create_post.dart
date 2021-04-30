@@ -61,6 +61,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     onPressed: () {
                       setState(() {
                         _sendIconColor = MyColors.BUTTON_DISABLED;
+                        
                       });
                       Future.delayed(Duration(milliseconds: 1000))
                           .then((value) => setState(() {
