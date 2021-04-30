@@ -25,6 +25,10 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   file_picker: ^3.0.1
+<<<<<<< HEAD
+=======
+  geolocator: ^7.0.1
+>>>>>>> 497873769f401735e3cb025a0b31cc100a2c7424
   html: ^0.15.0
   http: any
   pinput: ^1.2.0

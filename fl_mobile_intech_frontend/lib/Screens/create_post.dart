@@ -59,6 +59,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   ),
                   IconButton(
                     onPressed: () {
+<<<<<<< HEAD
                       setState(
                         () {
                           _sendIconColor = MyColors.BUTTON_DISABLED;
@@ -71,6 +72,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           },
                         ),
                       );
+=======
+                      setState(() {
+                        _sendIconColor = MyColors.BUTTON_DISABLED;
+                        
+                      });
+                      Future.delayed(Duration(milliseconds: 1000))
+                          .then((value) => setState(() {
+                                _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
+                              }));
+>>>>>>> 497873769f401735e3cb025a0b31cc100a2c7424
                     },
                     tooltip: 'Post your message',
                     icon: const Icon(
