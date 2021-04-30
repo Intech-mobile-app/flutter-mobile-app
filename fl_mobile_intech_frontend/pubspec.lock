@@ -107,6 +107,8 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
+=======
   geolocator:
     dependency: "direct main"
     description:
@@ -128,6 +130,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+>>>>>>> 497873769f401735e3cb025a0b31cc100a2c7424
   html:
     dependency: "direct main"
     description:
