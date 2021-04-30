@@ -11,4 +11,3 @@ class Posts {
     print(response.body);
   }
 }
-

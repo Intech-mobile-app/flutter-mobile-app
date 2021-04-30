@@ -59,13 +59,18 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      setState(() {
-                        _sendIconColor = MyColors.BUTTON_DISABLED;
-                      });
-                      Future.delayed(Duration(milliseconds: 1000))
-                          .then((value) => setState(() {
-                                _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
-                              }));
+                      setState(
+                        () {
+                          _sendIconColor = MyColors.BUTTON_DISABLED;
+                        },
+                      );
+                      Future.delayed(Duration(milliseconds: 1000)).then(
+                        (value) => setState(
+                          () {
+                            _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
+                          },
+                        ),
+                      );
                     },
                     tooltip: 'Post your message',
                     icon: const Icon(
@@ -113,13 +118,32 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       !snapshot.hasData) {
                     return Container();
                   }
-                  return Image.file(
-                    File(
-                      snapshot.data[0]
-                          .toString()
-                          .replaceAll('File: ', '')
-                          .replaceAll("'", ''),
-                    ),
+                  return GridView.count(
+                    crossAxisCount: 2,
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.vertical,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    shrinkWrap: true,
+                    children: [
+                      for (var i = 0; i < snapshot.data.length; i++)
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: FileImage(
+                                File(
+                                  snapshot.data[i]
+                                      .toString()
+                                      .replaceAll('File: ', '')
+                                      .replaceAll("'", ''),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   );
                 },
               ),
