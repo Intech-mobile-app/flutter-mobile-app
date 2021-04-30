@@ -14,6 +14,7 @@ class _MyAppState extends State<MyApp> {
   var newUser;
   var phNo;
   var registerSociety;
+  var authToken;
 
   @override
   void initState() {
@@ -27,10 +28,12 @@ class _MyAppState extends State<MyApp> {
       newUser = _prefs.getInt('newUser');
       phNo = _prefs.getInt('phNo');
       registerSociety = _prefs.getInt('registerSociety');
+      authToken = _prefs.getString('authToken');
     });
     print('SharedPrefs ${newUser.toString()}');
     print('phNo : $phNo');
     print('registerSociety : $registerSociety');
+    print('authToken : $authToken');
   }
 
   @override
@@ -46,7 +49,11 @@ class _MyAppState extends State<MyApp> {
       home: newUser == null
           ? OnBoardingScreen()
           : phNo == 1
-              ? HomeScreen()
+              ? authToken != null
+                  ? HomeScreen()
+                  : registerSociety == null
+                      ? RegisterSociety()
+                      : ApprovalScreen()
               : OtpScreen(),
     );
   }
