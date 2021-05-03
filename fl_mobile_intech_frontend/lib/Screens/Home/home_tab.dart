@@ -164,20 +164,22 @@ class _HomePageState extends State<HomePage>
                                         .length,
                                     itemBuilder: (context, index) {
                                       return Container(
-                                          width: 170,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(
+                                        width: 170,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
                                               15,
-                                            )),
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                finalResponse['data'][i]
-                                                    ['images'][index],
-                                              ),
-                                              fit: BoxFit.cover,
                                             ),
-                                          ));
+                                          ),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              finalResponse['data'][i]['images']
+                                                  [index],
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      );
                                     },
                                     separatorBuilder:
                                         (BuildContext context, int index) {
