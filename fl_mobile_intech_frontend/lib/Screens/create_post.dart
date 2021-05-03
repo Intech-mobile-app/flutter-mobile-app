@@ -30,6 +30,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    TextEditingController _textcontroller;
+    TextEditingController _messagecontroller;
     return Scaffold(
       body: Container(
         width: width,
@@ -61,7 +63,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     onPressed: () {
                       setState(() {
                         _sendIconColor = MyColors.BUTTON_DISABLED;
-                        
+                        if (UserFiles.selectedImageFileForPost.isNotEmpty) {
+                          Posts().createPost(_textcontroller.text, _messagecontroller.text);
+                          print("post created");
+                          print("post called");
+                        } else {
+                          print("not Userfiles");
+                        }
                       });
                       Future.delayed(Duration(milliseconds: 1000))
                           .then((value) => setState(() {
@@ -85,7 +93,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 TextInputType.name,
                 Icons.text_format_rounded,
                 true,
-                null,
+                _textcontroller,
                 null,
               ),
               createPostTextField(
@@ -94,7 +102,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 TextInputType.multiline,
                 Icons.message,
                 true,
-                null,
+                _messagecontroller,
                 Icons.attach_file_sharp,
               ),
               SizedBox(
@@ -103,8 +111,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               StreamBuilder(
                 stream: _getSelectedImageList(Duration(milliseconds: 1000)),
                 builder: (context, snapshot) {
-                  print(snapshot.data);
-                  print('data length :::');
                   if (!(snapshot.data
                               .toString()
                               .replaceAll('[', '')
@@ -114,13 +120,32 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       !snapshot.hasData) {
                     return Container();
                   }
-                  return Image.file(
-                    File(
-                      snapshot.data[0]
-                          .toString()
-                          .replaceAll('File: ', '')
-                          .replaceAll("'", ''),
-                    ),
+                  return GridView.count(
+                    crossAxisCount: 2,
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.vertical,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    shrinkWrap: true,
+                    children: [
+                      for (var i = 0; i < snapshot.data.length; i++)
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: FileImage(
+                                File(
+                                  snapshot.data[i]
+                                      .toString()
+                                      .replaceAll('File: ', '')
+                                      .replaceAll("'", ''),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   );
                 },
               ),
