@@ -2,9 +2,8 @@ name: CD Release Apk
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: 
+      - master
 
 jobs:
   build:
@@ -20,6 +19,7 @@ jobs:
         with:
           flutter-version: '2.2.0'
           channel: 'beta'
+      - run: flutter doctor
       - run: flutter pub get
       - run: flutter build apk -t lib/main.dart --split-per-abi
     
