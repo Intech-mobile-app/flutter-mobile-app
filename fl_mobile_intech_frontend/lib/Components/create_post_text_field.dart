@@ -47,7 +47,6 @@ Widget createPostTextField(labelText, hintText, keyboardType, prefixIcon,
 }
 
 _openFiles() async {
-  print('tapped');
   try {
     if (UserFiles.selectedImageFileForPost != null) {
       UserFiles.selectedImageFileForPost.clear();
@@ -60,10 +59,6 @@ _openFiles() async {
         print(_file);
         UserFiles.selectedImageFileForPost.add(_file.path.toString());
       });
-      print(UserFiles.selectedImageFileForPost.length);
-      print(UserFiles.selectedImageFileForPost[0]);
-      print('UserFiles');
-      print(UserFiles.selectedImageFileForPost.first);
     }
   } catch (e) {
     print(e);

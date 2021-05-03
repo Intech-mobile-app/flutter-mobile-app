@@ -2,7 +2,8 @@ import 'package:fl_mobile_intech/export.dart';
 
 class Posts {
   var images;
-  createPost() async {
+  createPost(String title, String message) async {
+    Posts().uploadPosts(UserFiles.selectedImageFileForPost);
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
       'Content-Type': API.jsonHeader,
@@ -10,11 +11,8 @@ class Posts {
     };
     var request =
         Request('POST', Uri.https(API.baseUrl, API.version + API.createPost));
-    request.body = '''{\r\n    
-        "title":"title",\r\n    
-        "post":"test",\r\n    
-        "images":images\r\n}
-        ''';
+    request.body = jsonEncode(
+        <String, dynamic>{"title": title, "post": message, "images": images});
     request.headers.addAll(headers);
 
     StreamedResponse response = await request.send();
@@ -26,7 +24,7 @@ class Posts {
     }
   }
 
-  uploadPosts(var files) async {
+   uploadPosts(List<dynamic> files) async {
     print("files passed");
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
@@ -40,12 +38,14 @@ class Posts {
 
     request.headers.addAll(headers);
 
-    StreamedResponse response = await request.send();
+    var response = await request.send();
 
     if (response.statusCode == 201) {
-      print(await response.stream.bytesToString());
+      images = await response.stream.bytesToString().toString();
+      
     } else {
       print(response.statusCode);
+      
     }
   }
 }
