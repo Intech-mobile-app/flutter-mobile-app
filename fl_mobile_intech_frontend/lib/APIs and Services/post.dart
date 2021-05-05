@@ -2,8 +2,7 @@ import 'package:fl_mobile_intech/export.dart';
 
 class Posts {
   var images;
-  createPost(String title, String message) async {
-    Posts().uploadPosts(UserFiles.selectedImageFileForPost);
+  createPost(BuildContext context,String title, String message) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
       'Content-Type': API.jsonHeader,
@@ -17,15 +16,17 @@ class Posts {
 
     StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       print(await response.stream.bytesToString());
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
     } else {
-      print(response.reasonPhrase);
+      print(response.statusCode);
     }
   }
 
-   uploadPosts(List<dynamic> files) async {
+  uploadPosts(BuildContext context,List<dynamic> files, title, message) async {
     print("files passed");
+
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
       'x-auth-token': _prefs.getString('authToken'),
@@ -41,11 +42,11 @@ class Posts {
     var response = await request.send();
 
     if (response.statusCode == 201) {
-      images = await response.stream.bytesToString().toString();
-      
+      var temp = await response.stream.bytesToString();
+      images = jsonDecode(temp)['data'];
+      createPost(context,title, message);
     } else {
       print(response.statusCode);
-      
     }
   }
 }

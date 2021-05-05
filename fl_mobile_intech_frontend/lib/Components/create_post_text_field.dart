@@ -2,8 +2,10 @@ import 'package:fl_mobile_intech/Components/user_files.dart';
 
 import '../export.dart';
 
-Widget createPostTextField(labelText, hintText, keyboardType, prefixIcon,
-    bottomPadding, controller, suffixIcon) {
+Widget createPostTextField( labelText, hintText, keyboardType,
+    prefixIcon, bottomPadding, controller,suffixIcon) {
+      
+      
   return Container(
     margin: EdgeInsets.only(
       bottom: bottomPadding == true ? 16.0 : 0.0,
@@ -32,7 +34,9 @@ Widget createPostTextField(labelText, hintText, keyboardType, prefixIcon,
         ),
         hintText: hintText,
         labelText: labelText,
-        prefixIcon: Icon(prefixIcon,),
+        prefixIcon: Icon(
+          prefixIcon,
+        ),
         suffixIcon: IconButton(
           icon: Icon(suffixIcon),
           onPressed: () => _openFiles(),
