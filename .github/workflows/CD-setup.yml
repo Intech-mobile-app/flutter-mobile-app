@@ -25,5 +25,7 @@ jobs:
           flutter-version: '2.2.0'
           channel: 'beta' 
       - run: flutter pub get
-      - run: flutter build apk -t lib/main.dart --split-per-abi
+      - run: flutter analyze
+      - run: flutter test
+      
         
