@@ -74,9 +74,9 @@ class _HomePageState extends State<HomePage>
               var title = finalResponse['data'][i]['title'];
               var message = finalResponse['data'][i]['text'];
               var postImages = finalResponse['data'][i]['images'];
-              var postId = finalResponse['data'][i]['_id'];
+              // var postId = finalResponse['data'][i]['_id'];
               var comments = finalResponse['data'][i]['comments'];
-              bool isDeleted = finalResponse['data'][i]['isDeleted'];
+              // bool isDeleted = finalResponse['data'][i]['isDeleted'];
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
