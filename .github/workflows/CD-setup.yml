@@ -3,7 +3,7 @@ name: CD Release Apk
 on:
   push:
     branches: 
-      - master
+      - nithish
     tags:
       - v*
 
