@@ -81,7 +81,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       Icons.send_outlined,
                     ),
                     color: _sendIconColor,
-                  )
+                  ),
                 ],
               ),
               SizedBox(
