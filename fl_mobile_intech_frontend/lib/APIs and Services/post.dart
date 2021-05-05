@@ -3,7 +3,6 @@ import 'package:fl_mobile_intech/export.dart';
 class Posts {
   var images;
   createPost(String title, String message) async {
-    Posts().uploadPosts(UserFiles.selectedImageFileForPost);
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
       'Content-Type': API.jsonHeader,
@@ -17,15 +16,16 @@ class Posts {
 
     StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       print(await response.stream.bytesToString());
     } else {
-      print(response.reasonPhrase);
+      print(response.statusCode);
     }
   }
 
-   uploadPosts(List<dynamic> files) async {
+  uploadPosts(List<dynamic> files) async {
     print("files passed");
+    
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
       'x-auth-token': _prefs.getString('authToken'),
@@ -42,10 +42,8 @@ class Posts {
 
     if (response.statusCode == 201) {
       images = await response.stream.bytesToString().toString();
-      
     } else {
       print(response.statusCode);
-      
     }
   }
 }

@@ -7,7 +7,9 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   Color _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
-
+  GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  TextEditingController _titlecontroller = TextEditingController();
+  TextEditingController _messagecontroller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -30,8 +32,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    TextEditingController _textcontroller;
-    TextEditingController _messagecontroller;
+
     return Scaffold(
       body: Container(
         width: width,
@@ -64,7 +65,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       setState(() {
                         _sendIconColor = MyColors.BUTTON_DISABLED;
                         if (UserFiles.selectedImageFileForPost.isNotEmpty) {
-                          Posts().createPost(_textcontroller.text, _messagecontroller.text);
+                          Posts().uploadPosts(UserFiles.selectedImageFileForPost).then( Posts().createPost(_titlecontroller.text, _messagecontroller.text));
                           print("post created");
                           print("post called");
                         } else {
@@ -93,7 +94,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 TextInputType.name,
                 Icons.text_format_rounded,
                 true,
-                _textcontroller,
+                _titlecontroller,
                 null,
               ),
               createPostTextField(
