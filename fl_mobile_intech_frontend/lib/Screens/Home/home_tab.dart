@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage>
       headers: {'x-auth-token': authToken},
     );
     finalResponse = jsonDecode(postResponse.body);
-    print('imageUrl : ${finalResponse['data'][0]['images']}');
-    print('datalength : ${finalResponse['data'].length}');
-    dataLength = finalResponse['data'].length;
-    setState(() {});
+    
+    setState(() {
+      dataLength = finalResponse['data'].length;
+    });
   }
 
   getInstance() async {

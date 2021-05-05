@@ -7,7 +7,6 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   Color _sendIconColor = MyColors.COLOR_PRIMARY_ACCENT;
-  GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   TextEditingController _titlecontroller = TextEditingController();
   TextEditingController _messagecontroller = TextEditingController();
   @override
@@ -65,12 +64,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       setState(() {
                         _sendIconColor = MyColors.BUTTON_DISABLED;
                         if (UserFiles.selectedImageFileForPost.isNotEmpty) {
-                          Posts().uploadPosts(UserFiles.selectedImageFileForPost).then( Posts().createPost(_titlecontroller.text, _messagecontroller.text));
-                          print("post created");
-                          print("post called");
+                          Posts().uploadPosts(context,UserFiles.selectedImageFileForPost,_titlecontroller.text,_messagecontroller.text);
+                          
                         } else {
                           print("not Userfiles");
                         }
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
                       });
                       Future.delayed(Duration(milliseconds: 1000))
                           .then((value) => setState(() {
