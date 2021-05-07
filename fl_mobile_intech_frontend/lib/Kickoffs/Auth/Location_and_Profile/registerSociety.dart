@@ -218,7 +218,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                               ),
                             ),
                             onPressed: snapshot.data == 1
-                                ? () {
+                                ? () async {
                                     user.addAll(
                                       <String, String>{
                                         "emailId": _emailIdController.text,
@@ -229,7 +229,7 @@ class _RegisterSocietyState extends State<RegisterSociety> {
                                         "societyId": _id.toString()
                                       },
                                     );
-                                    int statusCode = UserRequest.createUser(user);
+                                    dynamic statusCode = await UserRequest.createUser(user);
                                     if(statusCode == 201){
                                       _prefs.setInt('registerSociety', 1);
                                     }
