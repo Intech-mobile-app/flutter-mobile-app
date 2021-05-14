@@ -1,7 +1,7 @@
 import 'package:fl_mobile_intech/export.dart';
 
 class Posts {
-  createPost() async {
+  static createPost() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var headers = {
       'Content-Type': API.jsonHeader,

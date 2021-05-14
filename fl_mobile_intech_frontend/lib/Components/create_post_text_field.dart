@@ -32,7 +32,9 @@ Widget createPostTextField(labelText, hintText, keyboardType, prefixIcon,
         ),
         hintText: hintText,
         labelText: labelText,
-        prefixIcon: Icon(prefixIcon,),
+        prefixIcon: Icon(
+          prefixIcon,
+        ),
         suffixIcon: IconButton(
           icon: Icon(suffixIcon),
           onPressed: () => _openFiles(),

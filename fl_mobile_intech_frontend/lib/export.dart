@@ -29,6 +29,7 @@ export 'package:fl_mobile_intech/Components/ProfileScreen/image.dart';
 export 'package:fl_mobile_intech/Components/navigation_drawer.dart';
 export 'package:fl_mobile_intech/Components/create_post_text_field.dart';
 export 'package:fl_mobile_intech/Components/user_files.dart';
+export 'package:fl_mobile_intech/Components/post_view_template.dart';
 
 //Auth
 export 'package:fl_mobile_intech/Kickoffs/Auth/Location_and_Profile/get_location.dart';
@@ -50,5 +51,3 @@ export 'package:fl_mobile_intech/Screens/Home/home_tab.dart';
 export 'package:fl_mobile_intech/Screens/Home/members_tab.dart';
 export 'package:fl_mobile_intech/Screens/Profile/profile_tab.dart';
 export 'package:fl_mobile_intech/Screens/create_post.dart';
-
-

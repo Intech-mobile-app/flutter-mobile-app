@@ -14,4 +14,7 @@ class API {
 
   static const String getAllPosts =
       'https://llokality-intech-xald7lspga-el.a.run.app/api/v1.0/posts/0&6';
+
+  static const String getPostById =
+      'https://llokality-intech-xald7lspga-el.a.run.app/api/v1.0/posts/';
 }
