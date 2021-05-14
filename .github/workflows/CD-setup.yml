@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - nithish
+      - master
     tags:
       - v*
 
@@ -25,7 +26,6 @@ jobs:
           flutter-version: '2.2.0'
           channel: 'beta' 
       - run: flutter pub get
-      - run: flutter analyze
       - run: flutter test
       
         
