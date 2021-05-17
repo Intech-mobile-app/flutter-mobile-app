@@ -59,32 +59,98 @@ class _CommentsScreenState extends State<CommentsScreen> {
         backgroundColor: Colors.white,
         elevation: 1.0,
       ),
-      body: isDeleted != null
+      body: isDeleted == false
           ? SafeArea(
-              child: Container(
-                width: width,
-                height: height / 2,
-                padding: EdgeInsets.all(
-                  20,
-                ),
-                child: Column(
-                  children: [
-                    if (!isDeleted)
-                      postViewTemplate(
-                        name,
-                        houseNo,
-                        title,
-                        text,
-                        postImages,
-                        comments,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                      ),
-                  ],
-                ),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: width,
+                          height: height / 2,
+                          padding: EdgeInsets.all(
+                            20,
+                          ),
+                          child: Column(
+                            children: [
+                              postViewTemplate(
+                                name,
+                                houseNo,
+                                title,
+                                text,
+                                postImages,
+                                comments,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  DraggableScrollableSheet(
+                    initialChildSize: 0.2,
+                    minChildSize: 0.2,
+                    maxChildSize: 0.6,
+                    builder: (context, controller) {
+                      return Container(
+                        padding: EdgeInsets.only(
+                          top: 10,
+                          left: 10,
+                          right: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: MyColors.TEXT_COLOR.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(16.0),
+                              child: Text(
+                                'Drag to display comments',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w100,
+                                  color: MyColors.TEXT_COLOR.withOpacity(0.7),
+                                  letterSpacing: 0.75,
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              child: ListView.builder(
+                                controller: controller,
+                                shrinkWrap: true,
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    title: Text('Item $index'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             )
           : Container(),
