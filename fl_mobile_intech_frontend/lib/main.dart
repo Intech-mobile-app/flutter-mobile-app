@@ -1,7 +1,21 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+
 import 'export.dart';
 
-void main() {
-  runApp(MyApp());
+const _kTestingCrashlytics = true;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  //for force test crash
+  //FirebaseCrashlytics.instance.crash();
+  runZonedGuarded(() {
+    runApp(MyApp());
+  }, FirebaseCrashlytics.instance.recordError);
 }
 
 class MyApp extends StatefulWidget {
@@ -10,16 +24,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Future<void> _initializeFlutterFireFuture;
+  FirebaseAnalytics analytics = FirebaseAnalytics();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   SharedPreferences _prefs;
   var newUser;
   var phNo;
   var registerSociety;
   var authToken;
 
+  Future<void> _initializeFlutterFire() async {
+    if (_kTestingCrashlytics) {
+      // Force enable crashlytics collection enabled if we're testing it.
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    } else {
+      // Else only enable it in non-debug builds.
+      await FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(!kDebugMode);
+    }
+
+    // Pass all uncaught errors to Crashlytics.
+    Function originalOnError = FlutterError.onError;
+    FlutterError.onError = (FlutterErrorDetails errorDetails) async {
+      await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+      // Forward to original handler.
+      originalOnError(errorDetails);
+    };
+  }
+
   @override
   void initState() {
     super.initState();
     initializePrefs();
+    _initializeFlutterFireFuture = _initializeFlutterFire();
   }
 
   initializePrefs() async {
