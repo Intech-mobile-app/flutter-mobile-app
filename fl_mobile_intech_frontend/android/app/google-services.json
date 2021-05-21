@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "651869413105",
+    "project_id": "llokality-c7f05",
+    "storage_bucket": "llokality-c7f05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651869413105:android:9a0596be20ce339fb11350",
+        "android_client_info": {
+          "package_name": "com.bhavesh.fl_mobile_intech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651869413105-qcfqb46limknkf4a3okckdfvlcbjjdut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOiW5qsjzMGCMd1F6ClKRegJY1Kim-MMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651869413105-qcfqb46limknkf4a3okckdfvlcbjjdut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
