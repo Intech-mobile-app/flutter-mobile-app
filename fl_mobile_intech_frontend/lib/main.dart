@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fl_mobile_intech/Components/push_notification.dart';
 import 'package:flutter/foundation.dart';
 
 import 'export.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Future<void> _initializeFlutterFireFuture;
+  FirebaseNotification fcm;
   FirebaseAnalytics analytics = FirebaseAnalytics();
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   SharedPreferences _prefs;
@@ -32,6 +34,12 @@ class _MyAppState extends State<MyApp> {
   var phNo;
   var registerSociety;
   var authToken;
+
+  handleAsync() async {
+    await fcm.initialize();
+    String token = await fcm.getToken();
+    print("Firebase token : $token");
+  }
 
   Future<void> _initializeFlutterFire() async {
     if (_kTestingCrashlytics) {
@@ -57,6 +65,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initializePrefs();
     _initializeFlutterFireFuture = _initializeFlutterFire();
+    fcm = FirebaseNotification();
+    handleAsync();
   }
 
   initializePrefs() async {
