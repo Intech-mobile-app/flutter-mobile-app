@@ -1,4 +1,5 @@
 import 'package:fl_mobile_intech/export.dart';
+import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class CommentsScreen extends StatefulWidget {
   final postId;
@@ -134,7 +135,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                   SizedBox.expand(
                     child: DraggableScrollableSheet(
                       initialChildSize: 0.25,
-                      minChildSize: 0.12,
+                      minChildSize: 0.23,
                       maxChildSize: 0.8,
                       builder: (context, controller) {
                         return Container(
@@ -163,135 +164,153 @@ class _CommentsScreenState extends State<CommentsScreen> {
                               horizontal: 5,
                             ),
                             children: [
-                              Column(
-                                children: [
-                                  Center(
-                                    child: Container(
-                                      height: 8,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black45,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
+                              StickyHeader(
+                                header: Container(
+                                  padding: EdgeInsets.only(
+                                    bottom: 15,
                                   ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    'Comments',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.75,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    child: Flexible(
-                                      child: commentField,
-                                    ),
-                                  ),
-                                  IconButton(
-                                    hoverColor: MyColors.COLOR_PRIMARY_ACCENT,
-                                    icon: Icon(
-                                      Icons.double_arrow_rounded,
-                                      color: MyColors.COLOR_PRIMARY_ACCENT,
-                                      size: 35,
-                                    ),
-                                    onPressed: () {},
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              for (var i = 0; i < commentsLength; i++)
-                                Container(
-                                  margin: EdgeInsets.only(
-                                    top: 10,
-                                    bottom: 10,
-                                  ),
+                                  color: Colors.white,
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor:
-                                                Colors.blue.shade100,
-                                            radius: 18,
-                                            child: FlutterLogo(
-                                              size: 20,
-                                            ),
+                                      Center(
+                                        child: Container(
+                                          height: 8,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black45,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                           ),
-                                          SizedBox(
-                                            width: 15,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '$name',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
-                                                  letterSpacing: 0.5,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                '$houseNo',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w100,
-                                                  letterSpacing: 0.5,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 15,
                                       ),
                                       Text(
-                                        comments[i]['text'],
-                                        textAlign: TextAlign.start,
+                                        'Comments',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          letterSpacing: 0.5,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 0.75,
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 10,
+                                        height: 20,
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                        width: width - 40,
-                                        child: Divider(
-                                          height: 2,
-                                          color: Colors.black45,
-                                        ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: Flexible(
+                                              child: commentField,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            hoverColor:
+                                                MyColors.COLOR_PRIMARY_ACCENT,
+                                            icon: Icon(
+                                              Icons.double_arrow_rounded,
+                                              color:
+                                                  MyColors.COLOR_PRIMARY_ACCENT,
+                                              size: 35,
+                                            ),
+                                            onPressed: () {},
+                                          )
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ),
+                                content: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    for (var i = 0; i < commentsLength; i++)
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                          bottom: 10,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundColor:
+                                                      Colors.blue.shade100,
+                                                  radius: 18,
+                                                  child: FlutterLogo(
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 15,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '$name',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        letterSpacing: 0.5,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      '$houseNo',
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w100,
+                                                        letterSpacing: 0.5,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              comments[i]['text'],
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300,
+                                                letterSpacing: 0.5,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                              width: width - 40,
+                                              child: Divider(
+                                                height: 2,
+                                                color: Colors.black45,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         );
